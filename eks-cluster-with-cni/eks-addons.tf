@@ -9,6 +9,8 @@ resource "aws_eks_addon" "vpc-cni" {
         ENABLE_PREFIX_DELEGATION          = "true"
         POD_SECURITY_GROUP_ENFORCING_MODE = "standard"
         AWS_VPC_K8S_CNI_EXTERNALSNAT      = "true"
+        WARM_ENI_TARGET                   = "2"
+        WARM_PREFIX_TARGET                = "2"
       }
       enableNetworkPolicy = "true"
     }
