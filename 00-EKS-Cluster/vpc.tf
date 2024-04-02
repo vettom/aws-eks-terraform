@@ -13,14 +13,12 @@ module "vpc" {
   enable_vpn_gateway   = false
   single_nat_gateway   = true
 
-  # Below tags are required for ALB, and Karpenter
   public_subnet_tags = {
     "kubernetes.io/role/elb" = "1"
     "subnet_type"            = "public"
   }
 
   private_subnet_tags = {
-    "karpenter.sh/discovery"          = "eks-demo"
     "kubernetes.io/role/internal-elb" = "1"
     "subnet_type"                     = "private"
   }
