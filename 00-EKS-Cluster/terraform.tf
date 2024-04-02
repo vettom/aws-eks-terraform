@@ -10,9 +10,10 @@ terraform {
 
 provider "aws" {
   region  = "eu-west-1"
-  profile = "labs"
+  profile = "labs"  # Configure profile or authentication as required.
 }
 
+# Helm provider for installing Loadbalancer controller.
 provider "helm" {
   kubernetes {
     host                   = module.eks.cluster_endpoint
