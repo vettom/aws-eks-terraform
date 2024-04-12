@@ -4,10 +4,10 @@
 
  :desktop_computer: Terraform code to provision complete EKS cluster.  
 
-- [ ] VPC with 2 zones
-- [ ] EKS cluster with Managed NodeGroup
-- [ ] VPC CLI plugin
-- [ ] AWS Loadbalancer controller
+- [x] VPC with 2 zones
+- [x] EKS cluster with Managed NodeGroup
+- [x] VPC CLI plugin
+- [x] AWS Loadbalancer controller
 
 <img src="img/eks-design.png" width="600" height="400">
 
