@@ -1,3 +1,5 @@
+<img src="https://avatars.githubusercontent.com/u/20859413?v=4" style="float:right;width:42px;height:42px;">
+
 # Sample app Echo server.
 App will be deployed to `echoserver` namespace and ingress will be created with ALB
 
