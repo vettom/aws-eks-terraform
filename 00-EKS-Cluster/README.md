@@ -1,5 +1,5 @@
 # Complete EKS cluster
-Terraform code to provision complete EKS cluster. 
+Terraform code to provision complete EKS cluster.
 
 - [ ] VPC with 2 zones
 - [ ] EKS cluster with Managed NodeGroup
@@ -32,3 +32,5 @@ k9s
 |VPC| 2 public and 2 private subnets and Single NAT GW|
 |EKS Cluster|Node group with single SPOT instance, VPC CNI Plugin,AWS Loablanacer Controller |
 ------------------
+
+:dart:
