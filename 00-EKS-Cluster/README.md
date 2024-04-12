@@ -1,14 +1,15 @@
 # Complete EKS cluster
-This terraform code is all you need to spin up a new EKS cluster, ready to deploy and expose application with Loadbalancer controller.
+Terraform code to provision complete EKS cluster. 
 
-Following resources are created by this code
-- VPC 
-	- 2 public and 2 private subnet
-	- Single NAT GW
-- EKS cluster
-	- Node group with single SPOT instance
-	- VPC CNI Plugin
-	- AWS Loablanacer Controller.
+- [ ] VPC with 2 zones
+- [ ] EKS cluster with Managed NodeGroup
+- [ ] VPC CLI plugin
+- [ ] AWS Loadbalancer controller
+## 
+<img src="https://avatars.githubusercontent.com/u/20859413?v=4" style="float:right;width:42px;height:42px;">
+<img src="img/eks-design.png" width="600" height="400">
+
+
 
 > AWS profile called `labs` used for terraform authentication
 
@@ -25,3 +26,9 @@ aws eks --profile labs --region eu-west-1 update-kubeconfig --name eks-demo
 kubectl cluster-info
 k9s
 ```
+
+|Resource|Components|
+|--------------------------|--------------------------|
+|VPC| 2 public and 2 private subnets and Single NAT GW|
+|EKS Cluster|Node group with single SPOT instance, VPC CNI Plugin,AWS Loablanacer Controller |
+------------------
