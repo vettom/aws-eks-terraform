@@ -1,8 +1,8 @@
 <img src="https://avatars.githubusercontent.com/u/20859413?v=4" style="float:right;width:42px;height:42px;">
 
-# Complete EKS cluster :desktop_computer:
+# :desktop_computer: Complete EKS cluster 
 
- :desktop_computer: Terraform code to provision complete EKS cluster.  
+ Terraform code to provision complete EKS cluster.  
 
 - [x] VPC with 2 zones
 - [x] EKS cluster with Managed NodeGroup
@@ -13,7 +13,7 @@
 
 
 
-> AWS profile called `labs` used for terraform authentication
+> :information_source: AWS profile called `labs` used for terraform authentication
 
 ## Creating cluster
 ```bash
