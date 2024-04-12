@@ -2,7 +2,7 @@
 
 # Complete EKS cluster
 
-Terraform code to provision complete EKS cluster.  :desktop_computer:
+ :desktop_computer: Terraform code to provision complete EKS cluster.  
 
 - [ ] VPC with 2 zones
 - [ ] EKS cluster with Managed NodeGroup
