@@ -6,7 +6,7 @@
 
 - [x] VPC with 2 zones
 - [x] EKS cluster with Managed NodeGroup
-- [x] VPC CLI plugin
+- [x] VPC CLI add-on
 - [x] AWS Loadbalancer controller
 
 <img src="img/eks-design.png" width="600" height="400">
