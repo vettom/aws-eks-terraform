@@ -1,7 +1,7 @@
 <img src="https://avatars.githubusercontent.com/u/20859413?v=4" style="float:right;width:42px;height:42px;">
 
 # AWS-EKS
-Repository with various eks configurations. 
+Repository with EKS builds and its components using terraform, Helm and Argocd. 
 
 | Folder | Descreption |
 | ------------------- | ------------------ |
