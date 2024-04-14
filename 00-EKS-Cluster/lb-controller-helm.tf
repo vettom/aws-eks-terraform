@@ -26,10 +26,10 @@ resource "helm_release" "aws-load-balancer-controller" {
 
   set {
     name  = "serviceAccount.name"
-    value = "aws-load-balancer-controller-${module.eks.cluster_name}"
+    value = aws_iam_role.aws_load_balancer_controller.id
   }
   set {
     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com\\/role-arn"
-    value = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role\\/aws-load-balancer-controller-${module.eks.cluster_name}"
+    value = aws_iam_role.aws_load_balancer_controller.arn
   }
 }
