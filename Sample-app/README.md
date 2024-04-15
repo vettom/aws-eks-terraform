@@ -1,8 +1,9 @@
 <img src="https://avatars.githubusercontent.com/u/20859413?v=4" style="float:right;width:42px;height:42px;">
 
-# Sample app Echo server.
-App will be deployed to `echoserver` namespace and ingress will be created with ALB
-## Applying and testing app (yaml)
+# Simple app for testing.
+Apps deployed is configured with ingress to make it availabel externally if configured with Ingress controller names 'alb'
+
+### Install and test with echo app (yaml)
 ```bash
 kubectl apply -f echoserver.yaml
 kubectl get po -n echo server 
@@ -22,7 +23,7 @@ sleep 1
 done
 ```
 
-## Install and test ingress with sample app (HELM)
+### Install and test with demo app (HELM)
 ```bash
 helm install dv-demo-app dv-demo-app -n dvdemo --version 3.0.0 --create-namespace --repo  https://vettom.github.io/demohelmrepo/
 kubectl get ing -n dvdemo  # Make note of ALB DNS name
