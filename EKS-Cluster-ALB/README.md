@@ -2,7 +2,7 @@
 
 # :desktop_computer: Complete EKS cluster [Terraform]
 
-> :warning: Recomend using LB controller with Ingress controller than use ALB. Check EKS-Cluster-ingress
+> :warning: Recomend using LB controller with Ingress controller than use ALB. Check [EKS-Cluster-ingress](https://github.com/vettom/aws-eks-terraform/tree/main/EKS-Cluster-ingress)
 
  Terraform code to provision complete EKS cluster.  
 
