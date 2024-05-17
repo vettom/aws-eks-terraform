@@ -1,0 +1,73 @@
+fullnameOverride: ingress-nginx
+controller:
+  ingressClass: nginx-external
+  replicaCount: 1
+  electionID: ingress-external-controller-leader
+  ingressClassResource:
+    name: nginx-external
+    terminationGracePeriodSeconds: 60
+  config:
+    use-forwarded-headers: true
+    force-ssl-redirect: false
+    enable-real-ip: true
+    compute-full-forwarded-for: "true"
+  service:
+    enabled: true
+    external:
+      enabled: true
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+      # service.beta.kubernetes.io/aws-load-balancer-type: "external"
+      #service.beta.kubernetes.io/aws-load-balancer-type: nlb
+      service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+      # service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
+      service.beta.kubernetes.io/aws-load-balancer-target-group-attributes: preserve_client_ip.enabled=true
+    # internal:
+    #   enabled: false
+    #   type: LoadBalancer
+    #   annotations:
+    #     service.beta.kubernetes.io/aws-load-balancer-scheme: "internal"
+    #     service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    #     service.beta.kubernetes.io/aws-load-balancer-target-group-attributes: preserve_client_ip.enabled=true
+  # metrics:
+  #   enabled: false
+  #   serviceMonitor:
+  #     enabled: true
+  #     additionalLabels:
+  #       release: kube-prometheus-stack
+  # extraArgs:
+  #   default-ssl-certificate: "ingress-nginx/wildcard-cert"
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 8
+    targetCPUUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 50
+    behavior:
+      scaleDown:
+        stabilizationWindowSeconds: 300
+        policies:
+          - type: Pods
+            value: 1
+            periodSeconds: 180
+      scaleUp:
+        stabilizationWindowSeconds: 30
+        policies:
+          - type: Pods
+            value: 2
+            periodSeconds: 60
+  resources:
+    limits:
+      memory: 1024Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+defaultBackend:
+  enabled: false
+  resources:
+    limits:
+      cpu: 10m
+      memory: 20Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi

@@ -41,7 +41,7 @@ spec:
   - port: 80
     targetPort: 8080
     protocol: TCP
-  type: NodePort
+  type: ClusterIP
   selector:
     app: echoserver
 ---
@@ -51,16 +51,15 @@ metadata:
   name: echoserver
   namespace: echoserver
   annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/inbound-cidrs: "0.0.0.0/0"
+    alb.ingress.kubernetes.io/tags: Environment=dev,Team=DV-test-ingress
+    xxnginx.ingress.kubernetes.io/whitelist-source-range: "51.89.179.216/32"
+    # cert-manager.io/cluster-issuer: letsencrypt-route53
 spec:
-  ingressClassName: alb
-  tls:
-  - hosts:
-    - echo.vettom.github.io
+  ingressClassName: nginx-external
+  tls: []
+    # - hosts:
+    #     - echo.vettom.github.io
+    #   # secretName: demoapp-cert
   rules:
     - host: echo.vettom.github.io
       http: 
