@@ -1,6 +1,6 @@
 <img src="https://avatars.githubusercontent.com/u/20859413?v=4" style="float:right;width:42px;height:42px;">
 
-
+> :warning: This configuration uses AWS Access Entries, not aws_auth configMap
 
 # Eks cluster and Karpenter
 Contains everything required to configure Karpent autoscaling
