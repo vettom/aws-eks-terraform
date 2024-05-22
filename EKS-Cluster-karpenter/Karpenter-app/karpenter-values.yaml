@@ -1,0 +1,15 @@
+settings:
+  clusterName: eks-demo
+  clusterEndpoint: "https://94577DDAC3E7E83088CB8F0175D7D3F9.gr7.eu-west-1.eks.amazonaws.com"
+serviceAccount:
+  name: "karpenter-controller-eks-demo"
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::218687456330:role/karpenter-controller-eks-demo"
+controller:
+  resources:
+    requests:
+      cpu: 1
+      memory: 1Gi
+    limits:
+      cpu: 1
+      memory: 2Gi
