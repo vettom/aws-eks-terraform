@@ -6,10 +6,10 @@
 
  Terraform code to provision complete EKS cluster.  
 
-- [x] VPC with 2  privat and 2 public zones
-- [x] EKS cluster with Managed NodeGroup (1 Node)
-- [x] VPC CNI add-on with prefix delegation
-- [x] AWS Loadbalancer controller
+- VPC with 2  privat and 2 public zones
+- EKS cluster with Managed NodeGroup (1 Node)
+- VPC CNI add-on with prefix delegation
+- AWS Loadbalancer controller
 
 <img src="img/eks-design.png" width="600" height="400">
 

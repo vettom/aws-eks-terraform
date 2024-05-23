@@ -27,6 +27,7 @@ module "eks" {
   }
   authentication_mode = "API"
   # authentication_mode = "API_AND_CONFIG_MAP"
+  # With API Auth, creator no longer has cluster access, and users must be created.
   access_entries = {
     admin = {
       kubernetes_groups = []

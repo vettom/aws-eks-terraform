@@ -34,7 +34,6 @@ k9s
 ```bash
 helm install ingress-nginx -n ingress-nginx --create-namespace -f nginx-ingress/nginx-ingress-values.yaml ingress-nginx/ingress-nginx
 helm upgrade ingress-nginx -n ingress-nginx -f nginx-ingress/nginx-ingress-values.yaml ingress-nginx/ingress-nginx
-
 ```
 
 |Resource|Components|

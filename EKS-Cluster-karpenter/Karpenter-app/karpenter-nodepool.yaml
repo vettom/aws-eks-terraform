@@ -54,10 +54,10 @@ spec:
   detailedMonitoring: true
   subnetSelectorTerms:
     - tags:
-        karpenter.sh/discovery: "eks-demo"  
+        karpenter.sh/discovery: "eks-demo"  # Subnt must have this tag and access to Cluster endpoint
   securityGroupSelectorTerms:
     - tags:
-        karpenter.sh/discovery: "eks-demo"  
+        karpenter.sh/discovery: "eks-demo"  # Security group to assign to node based on Tag.
   tags:
     Name: karpenter-provisioned
     karpenter/NodePool: karpenter-default
