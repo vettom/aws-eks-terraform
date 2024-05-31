@@ -51,15 +51,15 @@ metadata:
   name: echoserver
   namespace: echoserver
   annotations:
-    alb.ingress.kubernetes.io/tags: Environment=dev,Team=DV-test-ingress
-    xxnginx.ingress.kubernetes.io/whitelist-source-range: "51.89.179.216/32"
+    alb.ingress.kubernetes.io/tags: Environment=dev,Team=eks-demo-ingress
+    #nginx.ingress.kubernetes.io/whitelist-source-range: "86.154.175.5/32"
     # cert-manager.io/cluster-issuer: letsencrypt-route53
 spec:
   ingressClassName: nginx-external
   tls: []
     # - hosts:
     #     - echo.vettom.github.io
-    #   # secretName: demoapp-cert
+    #   # secretName: echoapp-cert
   rules:
     - host: echo.vettom.github.io
       http: 

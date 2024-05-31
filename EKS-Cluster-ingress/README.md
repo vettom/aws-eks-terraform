@@ -1,6 +1,6 @@
 <img src="https://avatars.githubusercontent.com/u/20859413?v=4" style="float:right;width:42px;height:42px;">
 
-# :desktop_computer: Complete EKS cluster [Terraform]
+# :desktop_computer: EKS cluster with Ingress-Nginx [Terraform]
 
  Terraform code to provision complete EKS cluster.  
 
@@ -8,8 +8,9 @@
 - [x] EKS cluster with Managed NodeGroup (1 Node)
 - [x] VPC CNI add-on with prefix delegation
 - [x] LB Controller installed (No ALB)
+- [x] Ingress-Nginx controller
 
-<img src="img/eks-design.png" width="600" height="400">
+<img src="img/eks-ingress.jpg" width="600" height="400">
 
 
 
@@ -33,7 +34,7 @@ k9s
 
 ```bash
 helm install ingress-nginx -n ingress-nginx --create-namespace -f nginx-ingress/nginx-ingress-values.yaml ingress-nginx/ingress-nginx
-helm upgrade ingress-nginx -n ingress-nginx -f nginx-ingress/nginx-ingress-values.yaml ingress-nginx/ingress-nginx
+
 ```
 
 |Resource|Components|
