@@ -10,7 +10,7 @@
 - [x] LB Controller installed (No ALB)
 - [x] Ingress-Nginx controller
 
-<img src="img/eks-ingress.jpg" width="600" height="400">
+<img src="img/eks-ingress.png" width="600" height="400">
 
 
 
@@ -22,21 +22,23 @@ terraform init
 terraform plan
 terraform apply
 ```
-
 ## Configure kubeconfig
 ```bash
 aws eks --profile labs --region eu-west-1 update-kubeconfig --name eks-demo
 kubectl cluster-info
 k9s
 ```
-
 ## Insall nginx-ingress
 
 ```bash
 helm install ingress-nginx -n ingress-nginx --create-namespace -f nginx-ingress/nginx-ingress-values.yaml ingress-nginx/ingress-nginx
+kubectl get po,svc -n ingress-nginx
+```
+## Install Sample app
+```bash
+kubectl apply -f Ingress-App/ingress-app.yaml
 
 ```
-
 |Resource|Components|
 |--------------------------|--------------------------|
 |VPC| 2 public and 2 private subnets and Single NAT GW|

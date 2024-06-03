@@ -10,7 +10,7 @@ controller:
     use-forwarded-headers: true
     force-ssl-redirect: false
     enable-real-ip: true
-    compute-full-forwarded-for: "true"
+    compute-full-forwarded-for: true
   service:
     enabled: true
     external:

@@ -1,6 +1,6 @@
 settings:
   clusterName: eks-demo
-  clusterEndpoint: "https://94577DDAC3E7E83088CB8F0175D7D3F9.gr7.eu-west-1.eks.amazonaws.com"
+  clusterEndpoint: "https://A4681986382B00FC5912756FF73A6362.gr7.eu-west-1.eks.amazonaws.com"
 serviceAccount:
   name: "karpenter-controller-eks-demo"
   annotations:

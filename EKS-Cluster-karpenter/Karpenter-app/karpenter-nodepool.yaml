@@ -29,8 +29,8 @@ spec:
         kind: EC2NodeClass
         name: karpenter-default
   limits:
-    cpu: 50
-    memory: 200Gi
+    cpu: 20
+    memory: 50Gi
   disruption:
     consolidationPolicy: WhenUnderutilized
     expireAfter: 720h # 30 * 24h = 720h

@@ -14,19 +14,19 @@ Steps
 ## Steps
 ```bash
 terrafor init -upgrade ; terraform apply
-# Update cluster endpoint in Karpenter-app/karpenter-values.yaml file
-"clusterEndpoint: https://11111111111.gr7.eu-west-1.eks.amazonaws.com"
 # Configure local kubeconfig
 aws eks --profile labs  --region eu-west-1 update-kubeconfig --name eks-demo
 # Verify cluster access
 kubectl cluster-info
+# Update cluster endpoint in Karpenter-app/karpenter-values.yaml file
+"clusterEndpoint: https://11111111111.gr7.eu-west-1.eks.amazonaws.com"
 # Install Karpenter controller
 helm install karpenter -n karpenter --create-namespace oci://public.ecr.aws/karpenter/karpenter \
  --version 0.36.2 -f Karpenter-app/karpenter-values.yaml
 # Once karpenter pods are up and running, create nodepoo and node class
 kubectl apply -f Karpenter-app/karpenter-nodepool.yaml
 # Verify resources are created
-get ec2nc,nodepool
+kubectl get ec2nc,nodepool
 ```
 
 # Testing Karpenter

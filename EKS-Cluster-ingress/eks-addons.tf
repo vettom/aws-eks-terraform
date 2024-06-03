@@ -6,7 +6,7 @@ resource "aws_eks_addon" "vpc-cni" {
     {
       env = {
 
-        ENABLE_PREFIX_DELEGATION          = "true" # Required for ALB to work with target type ip
+        ENABLE_PREFIX_DELEGATION          = "true" # Required for LB to work with target type ip
         WARM_ENI_TARGET                   = "1"    # optional prefix IP pool.
         WARM_PREFIX_TARGET                = "1"
         POD_SECURITY_GROUP_ENFORCING_MODE = "standard"
