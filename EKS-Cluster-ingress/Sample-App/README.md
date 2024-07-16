@@ -6,8 +6,8 @@ Apps deployed is configured with ingress to make it availabel externally if conf
 ### Install and test with echo app (yaml)
 ```bash
 kubectl apply -f echoserver.yaml
-kubectl get po -n echo server 
-kubectl get ing -n nameserver # Make note of ALB DNS name
+kubectl get po -n echoserver 
+kubectl get ing -n echoserver # Make note of ALB DNS name
 
 # If no ALB provisioned, check Ingress for possible errors
 kubectl describe ing  echoserver -n echoserver

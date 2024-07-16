@@ -31,14 +31,14 @@ k9s
 ## Insall nginx-ingress
 
 ```bash
-helm install ingress-nginx -n ingress-nginx --create-namespace -f nginx-ingress/nginx-ingress-values.yaml ingress-nginx/ingress-nginx
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx 
+helm repo update ingress-nginx
+# Must be in aws-eks-terraform/EKS-Cluster-ingress folder to execute below
+helm install ingress-nginx -n ingress-nginx --create-namespace -f ingress-app/nginx-ingress-values.yaml ingress-nginx/ingress-nginx
 kubectl get po,svc -n ingress-nginx
 ```
-## Install Sample app
-```bash
-kubectl apply -f Ingress-App/ingress-app.yaml
-
-```
+## Install Sample app and verify
+Follow instructions in [Sample App README.md](https://github.com/vettom/aws-eks-terraform/blob/main/EKS-Cluster-ingress/Sample-App/README.md)
 |Resource|Components|
 |--------------------------|--------------------------|
 |VPC| 2 public and 2 private subnets and Single NAT GW|

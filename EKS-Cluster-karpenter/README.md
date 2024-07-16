@@ -13,6 +13,7 @@ Steps
 
 ## Steps
 ```bash
+# Execute following commands from  aws-eks-terraform/EKS-Cluster-karpenter folder
 terrafor init -upgrade ; terraform apply
 # Configure local kubeconfig
 aws eks --profile labs  --region eu-west-1 update-kubeconfig --name eks-demo
