@@ -42,3 +42,16 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+    # - name: https
+    #   hostname: "mygateway.vettom.github.io"
+    #   port: 443
+    #   protocol: HTTPS
+    #   allowedRoutes:
+    #     namespaces:
+    #       from: All
+    #   tls:
+    #     certificateRefs:
+    #       - kind: Secret
+    #         group: ""
+    #         name: "mygateway-cert"
+    #         namespace: gateway
