@@ -1,6 +1,5 @@
-<a href="https://vettom.github.io/"><img src="https://avatars.githubusercontent.com/u/20859413?v=4" alt="vettom.github.io" style="width:42px;height:42px;"></a>
+<a target="_blank" href="https://vettom.github.io/"><img src="https://vettom.github.io/img/vettom-banner.jpg" alt="vettom.github.io" style="width:42px;height:100px;"></a>
 
-For details visit [vettom.github.io](https://vettom.github.io/)
 
 # :desktop_computer: Complete EKS cluster [Terraform]
 
