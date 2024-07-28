@@ -1,4 +1,4 @@
-<a target="_blank" href="https://vettom.github.io/"><img src="https://vettom.github.io/img/vettom-banner.jpg" alt="vettom.github.io"  style="float:right;width:250px;height:42px;"></a>
+<a target="_blank" href="https://vettom.github.io/"><img src="https://vettom.github.io/img/vettom-banner.jpg" alt="vettom.github.io"  style="float:right;width:500px;height:42px;"></a>
 
 
 # :desktop_computer: Complete EKS cluster [Terraform]
