@@ -1,5 +1,6 @@
 <img src="https://avatars.githubusercontent.com/u/20859413?v=4" style="float:right;width:42px;height:42px;">
-For details visite [https://vettom.github.io/](https://vettom.github.io/)
+
+For details visit [vettom.github.io](https://vettom.github.io/)
 
 > :warning: This configuration uses AWS Access Entries, not aws_auth configMap
 

@@ -1,5 +1,6 @@
 <img src="https://avatars.githubusercontent.com/u/20859413?v=4" style="float:right;width:42px;height:42px;">
-For details visite [https://vettom.github.io/](https://vettom.github.io/)
+
+For details visit [vettom.github.io](https://vettom.github.io/)
 
 # :desktop_computer: EKS cluster with Gateway API [Envoy]
  [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/) is the next generation of Kubernetes Ingress, Load Balancing, and Service Mesh APIs. While Gateway API is part of Kubernetes, you will require a provider software to implement and manage functionalities. There are [multiple providers](https://gateway-api.sigs.k8s.io/implementations/) and in this example I will be using [Envoy Gateway](https://gateway.envoyproxy.io/)
