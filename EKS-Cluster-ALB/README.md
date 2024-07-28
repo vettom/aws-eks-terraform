@@ -1,6 +1,4 @@
-<img src="https://avatars.githubusercontent.com/u/20859413?v=4" style="float:right;width:42px;height:42px;">
-
-![vettom.github.io](https://avatars.githubusercontent.com/u/20859413?v=4)[(vettom.github.io)](https://vettom.github.io/)
+<a href="https://vettom.github.io/"><img src="https://avatars.githubusercontent.com/u/20859413?v=4" alt="vettom.github.io" style="width:42px;height:42px;"></a>
 
 For details visit [vettom.github.io](https://vettom.github.io/)
 
