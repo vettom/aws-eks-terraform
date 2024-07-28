@@ -1,4 +1,4 @@
-<img src="https://avatars.githubusercontent.com/u/20859413?v=4" style="float:right;width:42px;height:42px;">
+<a href="https://vettom.github.io/"><img src="https://vettom.github.io/img/vettom-banner.jpg" alt="vettom.github.io" ></a>
 
 For details visit [vettom.github.io](https://vettom.github.io/)
 
