@@ -1,7 +1,5 @@
 <a href="https://vettom.github.io/"><img src="https://vettom.github.io/img/vettom-banner.jpg" alt="vettom.github.io" ></a>
 
-For details visit [vettom.github.io](https://vettom.github.io/)
-
 > :warning: This configuration uses AWS Access Entries, not aws_auth configMap
 
 # Eks cluster and Karpenter

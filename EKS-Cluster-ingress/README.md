@@ -1,7 +1,5 @@
 <a href="https://vettom.github.io/"><img src="https://vettom.github.io/img/vettom-banner.jpg" alt="vettom.github.io" ></a>
 
-For details visit [vettom.github.io](https://vettom.github.io/)
-
 # :desktop_computer: EKS cluster with Ingress-Nginx [Terraform]
 
  Terraform code to provision complete EKS cluster.  
