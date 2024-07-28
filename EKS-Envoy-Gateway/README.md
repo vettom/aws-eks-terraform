@@ -12,7 +12,7 @@ This example covers following
 - [x] [Envoy Gateway](https://gateway.envoyproxy.io/)  Gateway API
 - [x] Deploy and verify [Gateway API](https://gateway-api.sigs.k8s.io/) using Sample app.
 
-<img src="img/eks-ingress.png" width="600" height="400">
+<img src="img/envoy-gateway.jpg" width="600" height="400">
 
 > :information_source: AWS profile called `labs` used for terraform authentication
 
