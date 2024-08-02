@@ -15,7 +15,7 @@ module "eks" {
       min_size       = 1
       max_size       = 4
       desired_size   = 1
-      instance_types = ["m5.large"]
+      instance_types = ["m6a.large"]
       capacity_type  = "SPOT"
       update_config = {
         max_unavailable_percentage = 33
@@ -25,13 +25,14 @@ module "eks" {
   node_security_group_tags = {
     "karpenter.sh/discovery" = "eks-demo"
   }
-  authentication_mode = "API"
-  # authentication_mode = "API_AND_CONFIG_MAP"
+  authentication_mode                      = "API_AND_CONFIG_MAP"
+  enable_cluster_creator_admin_permissions = true
+
   # With API Auth, creator no longer has cluster access, and users must be created.
   access_entries = {
     admin = {
       kubernetes_groups = []
-      principal_arn     = "arn:aws:iam::218687456330:user/denny.vettom@vettom.co.uk"
+      principal_arn     = "arn:aws:iam::218687456330:user/denny.vettom@vettom.online"
       policy_associations = {
         example = {
           policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
