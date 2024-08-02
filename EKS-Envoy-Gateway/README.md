@@ -1,6 +1,6 @@
 <a href="https://vettom.github.io/"><img src="https://vettom.github.io/img/vettom-banner.jpg" alt="vettom.github.io" ></a>
 
-# :desktop_computer: EKS cluster with Gateway API [Envoy]
+# :desktop_computer: EKS cluster with Gateway API (Envoy Gateway Fabric)
  [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/) is the next generation of Kubernetes Ingress, Load Balancing, and Service Mesh APIs. While Gateway API is part of Kubernetes, you will require a provider software to implement and manage functionalities. There are [multiple providers](https://gateway-api.sigs.k8s.io/implementations/) and in this example I will be using [Envoy Gateway](https://gateway.envoyproxy.io/)
 
 This example covers following
@@ -33,7 +33,7 @@ helm install gateway oci://docker.io/envoyproxy/gateway-helm --version v1.0.2 -n
 # Verify Gateway API CRD's are installed and Pods are running
 kubectl api-resources --api-group gateway.networking.k8s.io
 # Apply Envoy proxy configuration and create Gateway
-kubectl apply -f Gateway/gateway.yaml
+kubectl apply -f Gateway/external-gateway.yaml
 # Verify Gateway is created and Loadbalancer allocated
 kubectl get gateway -n gateway
 ```
