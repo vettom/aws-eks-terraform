@@ -28,7 +28,7 @@ spec:
             limits:
               memory: 1Gi
       envoyHpa:
-        minReplicas: 2
+        minReplicas: 3
         maxReplicas: 10
         metrics:
           - resource:
