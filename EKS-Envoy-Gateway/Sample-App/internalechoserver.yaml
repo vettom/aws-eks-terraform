@@ -1,0 +1,68 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: echoserver1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echoserver
+  namespace: echoserver1
+spec:
+  selector:
+    matchLabels:
+      app: echoserver
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: echoserver
+    spec:
+      containers:
+        - image: k8s.gcr.io/e2e-test-images/echoserver:2.5
+          name: demo-echo
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: 16Mi
+              cpu: 10m
+            limits:
+              memory: 64Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: echoserver
+  namespace: echoserver1
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  type: ClusterIP
+  selector:
+    app: echoserver
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: dvdemo-http
+  namespace: echoserver1
+spec:
+  parentRefs:
+    - name: internal-gateway
+      sectionName: http
+      namespace: gateway
+  hostnames:
+    - dvinternal.vettom.online
+  rules:
+    - backendRefs:
+        - kind: Service
+          name: echoserver
+          port: 80
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
