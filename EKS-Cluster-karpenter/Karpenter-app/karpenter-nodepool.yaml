@@ -43,7 +43,8 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
-  amiFamily: AL2 # Amazon Linux 2
+  amiFamily: Bottlerocket # Much faster deployment of new node.
+  # amiFamily: AL2 # Amazon Linux 2. Slower to deploy
   blockDeviceMappings:
     - deviceName: /dev/xvda
       ebs:
