@@ -1,29 +1,29 @@
 <a href="https://vettom.github.io/"><img src="https://vettom.github.io/img/vettom-banner.jpg" alt="vettom.github.io" ></a>
 
-> :warning: This configuration uses AWS Access Entries, not aws_auth configMap
-
-# Eks cluster and Karpenter
+# Eks cluster and Karpenter V1
 Contains everything required to configure Karpenter autoscaling
 Steps
 - Apply terraform
 - Configure kubeconfig and retrieve Endpoint URL
-- Update EndPointURL in karpeneter-values.yaml
 - Install Karpenter controller
 - Apply karpenter-nodepool
 
 ## Steps
 ```bash
 # Execute following commands from  aws-eks-terraform/EKS-Cluster-karpenter folder
-terrafor init -upgrade ; terraform apply
+terraform init -upgrade ; terraform apply
 # Configure local kubeconfig
 aws eks --profile labs  --region eu-west-1 update-kubeconfig --name eks-demo
 # Verify cluster access
 kubectl cluster-info
-# Update cluster endpoint in Karpenter-app/karpenter-values.yaml file
-"clusterEndpoint: https://11111111111.gr7.eu-west-1.eks.amazonaws.com"
+
+# Authenticate with ECR public repo
+aws ecr-public get-login-password --region us-east-1 | helm registry login \
+     --username AWS --password-stdin public.ecr.aws
+
 # Install Karpenter controller
 helm install karpenter -n karpenter --create-namespace oci://public.ecr.aws/karpenter/karpenter \
- --version 0.36.2 -f Karpenter-app/karpenter-values.yaml
+ --version 1.0.6 -f Karpenter-app/karpenter-values.yaml
 # Once karpenter pods are up and running, create nodepoo and node class
 kubectl apply -f Karpenter-app/karpenter-nodepool.yaml
 # Verify resources are created
