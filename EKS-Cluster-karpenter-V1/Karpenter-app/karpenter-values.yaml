@@ -4,4 +4,4 @@ replicas: 1
 serviceAccount:
   name: "karpenter-controller-eks-demo"
   annotations:
-    eks.amazonaws.com/role-arn: "arn:aws:iam::218687456330:role/karpenter-controller-eks-demo"
+    eks.amazonaws.com/role-arn: "arn:aws:iam::<AWS-ACCOUNT-ID>:role/karpenter-controller-eks-demo"
