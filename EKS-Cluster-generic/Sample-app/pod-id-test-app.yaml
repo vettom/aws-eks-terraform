@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: example
+spec: {}
+status: {}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: exampleserviceaccount
+  namespace: example
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dvawscli
+  name: dvawscli
+  namespace: example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dvawscli
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: dvawscli
+    spec:
+      serviceAccountName: exampleserviceaccount
+      containers:
+      - image: dennysv/dvawscli
+        name: dvawscli
+        resources: {}

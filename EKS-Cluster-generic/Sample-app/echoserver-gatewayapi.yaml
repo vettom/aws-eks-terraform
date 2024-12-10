@@ -58,6 +58,7 @@ spec:
   hostnames:
     - dvdemo.vettom.github.io
     - www.vettom.online
+    - new.vettom.online
   rules:
     - backendRefs:
         - kind: Service

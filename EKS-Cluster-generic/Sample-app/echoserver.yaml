@@ -41,29 +41,34 @@ spec:
   - port: 80
     targetPort: 8080
     protocol: TCP
-  type: ClusterIP
+  type: NodePort
   selector:
     app: echoserver
 ---
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: dvdemo-http
+  name: echoserver
   namespace: echoserver
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/inbound-cidrs: "0.0.0.0/0"
 spec:
-  parentRefs:
-    - name: external-gateway
-      sectionName: http
-      namespace: gateway
-  hostnames:
-    - dvdemo.vettom.github.io
-    - www.vettom.online
+  ingressClassName: alb
+  tls:
+  - hosts:
+    - echo.vettom.github.io
   rules:
-    - backendRefs:
-        - kind: Service
-          name: echoserver
-          port: 80
-      matches:
-        - path:
-            type: PathPrefix
-            value: /
+    - host: echo.vettom.github.io
+      http: 
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: echoserver
+                port:
+                  number: 80

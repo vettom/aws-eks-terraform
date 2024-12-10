@@ -1,0 +1,8 @@
+serviceAccount:
+  name: external-dns-controller
+sources:
+  - ingress
+  - gateway-httproute
+domainFilters:
+  - vettom.online
+txtOwnerId: "eks-demo-cluster"
