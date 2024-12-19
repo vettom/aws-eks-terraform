@@ -5,4 +5,5 @@ sources:
   - gateway-httproute
 domainFilters:
   - vettom.online
+  - "*.prd.vettom.online"
 txtOwnerId: "eks-demo-cluster"

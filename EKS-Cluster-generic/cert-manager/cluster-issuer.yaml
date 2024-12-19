@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-route53
+spec:
+  acme:
+    email: admin@vettom.online
+    server: https://acme-staging-v02.api.letsencrypt.org/directory   # Staging server
+    # server: https://acme-v02.api.letsencrypt.org/directory   # Production service
+    privateKeySecretRef:
+      name: letsencrypt-route53
+    solvers:
+    - selector:
+        dnsZones:
+          - vettom.online  
+      dns01:
+        route53:
+          region: eu-west-1

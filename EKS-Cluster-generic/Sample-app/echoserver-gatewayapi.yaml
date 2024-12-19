@@ -56,9 +56,10 @@ spec:
       sectionName: http
       namespace: gateway
   hostnames:
-    - dvdemo.vettom.github.io
     - www.vettom.online
     - new.vettom.online
+    - extra.vettom.online
+    - new.vettom.co.uk
   rules:
     - backendRefs:
         - kind: Service
