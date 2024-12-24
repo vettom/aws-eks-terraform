@@ -1,25 +1,25 @@
 <a href="https://vettom.github.io/"><img src="https://vettom.github.io/img/vettom-banner.jpg" alt="vettom.github.io" ></a>
 
+# EKS Cluster with extras
+Spin up EKS cluster and configure various IAM Pod Identity for applications.
 
-# :desktop_computer: Complete EKS cluster [Terraform]
-
- Terraform code to provision complete EKS cluster.  
-
-- VPC with 2  privat and 2 public zones
-- EKS cluster with Managed NodeGroup (1 Node)
-- VPC CNI add-on with prefix delegation
-- AWS Loadbalancer controller
-
-<img src="img/eks-design.png" width="600" height="400">
-
-
-> :information_source: AWS profile called `labs` used for terraform authentication
-
-## Creating cluster
+#Getting started
 ```bash
-terraform init
-terraform plan
-terraform apply
+# Install Gateway API and Gateway
+helm install gateway oci://docker.io/envoyproxy/gateway-helm --version v1.0.2 -n gateway --create-namespace
+kubectl apply -f ext-gateway/external-gateway.yaml
+
+# Install External DNS
+helm install  external-dns  external-dns -n external-dns \
+--create-namespace --repo https://kubernetes-sigs.github.io/external-dns \
+--version 1.15.0 -f ext-dns/values.yaml
+
+# Install Cert mgr
+helm install  cert-manager cert-manager -n cert-manager  --create-namespace  \
+--repo https://charts.jetstack.io/ --version v1.16.2 -f cert-manager/values.yaml
+ 
+ kubectl apply -f cert-manager/cluster-issuer.yaml
+
 ```
 
 ## Configure kubeconfig
@@ -28,16 +28,3 @@ aws eks --profile labs --region eu-west-1 update-kubeconfig --name eks-demo
 kubectl cluster-info
 k9s
 ```
-## Limitations of using ALB for ingress
-|Limitation|Comments|
-|------------------------|----------------------------------|
-|Registration/deregistration| ALB is slow to register/deregister targets, can lead to down time during release unless workarounds used |
-|Metrics| ALB Metrics are in Cloudwatch, have to export separately to use with tools of your choice like Prometheus |
-|Cannot use ClusterIP| ALB TG send traffic direct to pod, so cannot support ClusterIP. |
-
-
-|Resource|Components|
-|--------------------------|--------------------------|
-|VPC| 2 public and 2 private subnets and Single NAT GW|
-|EKS Cluster|Node group with single SPOT instance, VPC CNI Plugin,AWS Loablanacer Controller |
-------------------

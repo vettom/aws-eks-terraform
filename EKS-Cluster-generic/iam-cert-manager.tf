@@ -47,9 +47,9 @@ resource "aws_iam_role_policy_attachment" "certmanager_policy_attachement" {
   policy_arn = aws_iam_policy.certmanager_iam_policy.arn
 }
 # Associate Pod identity with IAM role
-resource "aws_eks_pod_identity_association" "certmanager" {
-  cluster_name    = module.eks.cluster_name
-  namespace       = "cert-manager"
-  service_account = "cert-manager"
-  role_arn        = aws_iam_role.certmanager_iam_role.arn
-}
+# resource "aws_eks_pod_identity_association" "certmanager" {
+#   cluster_name    = module.eks.cluster_name
+#   namespace       = "cert-manager"
+#   service_account = "cert-manager"
+#   role_arn        = aws_iam_role.certmanager_iam_role.arn
+# }
