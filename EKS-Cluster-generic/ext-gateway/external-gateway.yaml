@@ -43,7 +43,7 @@ spec:
         namespaces:
           from: All
     - name: https
-      hostname: "*.vettom.online"
+      hostname: "www.vettom.online"
       port: 443
       protocol: HTTPS
       allowedRoutes:
@@ -53,6 +53,6 @@ spec:
         certificateRefs:
           - kind: Secret
             group: ""
-            name: "mygateway-cert"
+            name: "vettom-online-tls"
             namespace: gateway
 

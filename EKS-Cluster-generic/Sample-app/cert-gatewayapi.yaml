@@ -53,10 +53,9 @@ metadata:
 spec:
   parentRefs:
     - name: external-gateway
-      sectionName: http
       namespace: gateway
   hostnames:
-    - test123.vettom.online
+    - www.vettom.online
   rules:
     - backendRefs:
         - kind: Service

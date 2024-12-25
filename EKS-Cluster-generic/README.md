@@ -15,8 +15,8 @@ helm install  external-dns  external-dns -n external-dns \
 --version 1.15.0 -f ext-dns/values.yaml
 
 # Install Cert mgr
-helm install  cert-manager cert-manager -n cert-manager  --create-namespace  \
---repo https://charts.jetstack.io/ --version v1.16.2 -f cert-manager/values.yaml
+helm repo add jetstack https://charts.jetstack.io ; helm repo update jetstack
+helm install  cert-manager jetstack/cert-manager -n cert-manager  --create-namespace --version v1.16.2 -f cert-manager/values.yaml
  
  kubectl apply -f cert-manager/cluster-issuer.yaml
 

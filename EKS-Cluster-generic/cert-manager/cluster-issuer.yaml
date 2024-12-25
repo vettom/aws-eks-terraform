@@ -5,8 +5,8 @@ metadata:
 spec:
   acme:
     email: admin@vettom.online
-    server: https://acme-staging-v02.api.letsencrypt.org/directory   # Staging server
-    # server: https://acme-v02.api.letsencrypt.org/directory   # Production service
+    server: https://acme-v02.api.letsencrypt.org/directory   # Production service
+    # server: https://acme-staging-v02.api.letsencrypt.org/directory   # Staging server
     privateKeySecretRef:
       name: letsencrypt-route53
     solvers:
@@ -14,7 +14,6 @@ spec:
         dnsZones:
           - vettom.online
           - "*.vettom.online"
-          - "*.prd.vettom.online"
       dns01:
         route53:
-          region: eu-west-1
+          region: eu-west-1s

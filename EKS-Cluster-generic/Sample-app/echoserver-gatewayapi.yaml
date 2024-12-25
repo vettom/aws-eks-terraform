@@ -53,7 +53,7 @@ metadata:
 spec:
   parentRefs:
     - name: external-gateway
-      sectionName: http
+      # sectionName: http  # If defined, gateway must specify route to section.
       namespace: gateway
   hostnames:
     - www.vettom.online
