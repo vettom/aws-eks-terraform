@@ -1,4 +1,4 @@
-<img src="https://avatars.githubusercontent.com/u/20859413?v=4" style="float:right;width:42px;height:42px;">
+![vettom.pages.dev banner](https://vettom-images.s3.eu-west-1.amazonaws.com/logo/vettom-banner.jpg)
 
 # AWS-EKS
 Repository with EKS builds and its components using terraform, Helm and Argocd. 
@@ -10,4 +10,4 @@ Repository with EKS builds and its components using terraform, Helm and Argocd.
 |[EKS Cluster and Karpenter Autoscaler](https://github.com/vettom/aws-eks-terraform/tree/main/EKS-Cluster-karpenter)|EKS and Karpenter Autoscaler using AWS API Auth|
 
 
-## [https://vettom.github.io/](https://vettom.github.io)
+## [https://vettom.pages.dev/](https://vettom.pages.dev)
