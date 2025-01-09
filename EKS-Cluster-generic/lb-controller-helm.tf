@@ -1,5 +1,3 @@
-# Get current AWS account ID for SA annotation
-data "aws_caller_identity" "current" {}
 
 # Use Helm to install LB controller.
 resource "helm_release" "aws-load-balancer-controller" {
