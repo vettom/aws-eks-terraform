@@ -15,11 +15,11 @@ module "vpc" {
 
   public_subnet_tags = {
     "kubernetes.io/role/elb" = "1" # Tag for external LoadBalancer
-    "subnet_type"            = "public"
+    # "subnet_type"            = "public"
   }
 
   private_subnet_tags = {
     "kubernetes.io/role/internal-elb" = "1" # Tag for internal LoadBalancer
-    "subnet_type"                     = "private"
+    # "subnet_type"                     = "private"
   }
 }

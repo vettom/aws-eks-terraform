@@ -1,4 +1,4 @@
-<a href="https://vettom.github.io/"><img src="https://vettom.github.io/img/vettom-banner.jpg" alt="vettom.github.io" ></a>
+<a href="https://vettom.pages.dev/"><img src="![vettom.pages.dev banner](https://vettom-images.s3.eu-west-1.amazonaws.com/logo/vettom-banner.jpg)" alt="vettom.pages.dev" ></a>
 
 # EKS Cluster with extras
 Spin up EKS cluster and configure various IAM Pod Identity for applications.

@@ -1,4 +1,4 @@
-<img src="https://avatars.githubusercontent.com/u/20859413?v=4" style="float:right;width:42px;height:42px;">
+<a href="https://vettom.pages.dev/"><img src="![vettom.pages.dev banner](https://vettom-images.s3.eu-west-1.amazonaws.com/logo/vettom-banner.jpg)" alt="vettom.pages.dev" ></a>
 
 # AWS-EKS
 Repository with EKS builds and its components using terraform, Helm and Argocd. 
