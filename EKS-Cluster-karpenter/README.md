@@ -1,4 +1,4 @@
-<a href="https://vettom.pages.dev/"><img src="![vettom.pages.dev banner](https://vettom-images.s3.eu-west-1.amazonaws.com/logo/vettom-banner.jpg)" alt="vettom.pages.dev" ></a>
+[<img src="https://vettom-images.s3.eu-west-1.amazonaws.com/logo/vettom-banner.jpg">](https://vettom.pages.dev/)
 
 > :warning: This configuration uses AWS Access Entries, not aws_auth configMap
 
