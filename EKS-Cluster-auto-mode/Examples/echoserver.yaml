@@ -13,7 +13,7 @@ spec:
   selector:
     matchLabels:
       app: echoserver
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -27,7 +27,43 @@ spec:
           resources:
             requests:
               memory: 16Mi
-              cpu: 10m
+              cpu: 500m
             limits:
               memory: 64Mi
-  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: echoserver
+  namespace: echoserver
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  type: ClusterIP
+  selector:
+    app: echoserver
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: echoserver
+  namespace: echoserver
+spec:
+  ingressClassName: alb
+  tls: []
+    # - hosts:
+    #     - echo.vettom.github.io
+    #   # secretName: echoapp-cert
+  rules:
+    - host: echo.vettom.pages.dev
+      http: 
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: echoserver
+                port:
+                  number: 80
