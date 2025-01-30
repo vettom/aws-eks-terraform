@@ -17,3 +17,15 @@ terraform init; terraform plan
 terraform apply --auto-approve
 ```
 This will create VPC with 2 subnets, install EKS Auto and configured `ClusterAdmin` access to the identity creating cluster.
+
+## Testing App with Curl
+```bash
+ALB_URL=" "
+curl -H "HOST:echo.vettom.pages.dev" $ALB_URL
+# run in loop to validate loadbalancing.
+while true
+do
+curl -s -H "HOST:echo.vettom.pages.dev" $ALB_URL | grep Hostname
+sleep 1
+done
+```

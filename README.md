@@ -5,7 +5,7 @@ Repository with EKS builds and its components using terraform, Helm and Argocd.
 
 | Folder | Descreption |
 | ------------------- | ------------------ |
-|[EKS Cluster Auto Mode](https://github.com/vettom/aws-eks-terraform/tree/main/EKS-Cluster-auto-mode)|Build EKS cluster in Auto Mode using Terraform|
+|[EKS Cluster Auto Mode](https://github.com/vettom/aws-eks-terraform/tree/main/EKS-AUTO-Mode)|Build EKS cluster in Auto Mode using Terraform|
 |[EKS cluster  with Envoy Gateway](https://github.com/vettom/aws-eks-terraform/tree/main/EKS-Envoy-Gateway)|Implement Gateway API using Envoy Gateway|
 |[EKS-Cluster-ALB](https://github.com/vettom/aws-eks-terraform/tree/main/EKS-Cluster-ALB)|Complete EKS cluster using terraform. Includes VPC, EKS Cluster, VPC-CNI and Loadbalancer controller.|
 |[Eks cluster with nginx-ingress](https://github.com/vettom/aws-eks-terraform/tree/main/EKS-Cluster-ingress)|EKS with nginx-ingress controller and LB controller|
