@@ -1,4 +1,4 @@
-[<img src="https://vettom-images.s3.eu-west-1.amazonaws.com/logo/vettom-banner.jpg">](https://vettom.pages.dev/)
+<a href="https://vettom.github.io/"><img src="https://vettom.github.io/img/vettom-banner.jpg" alt="vettom.github.io" ></a>
 
 # Installing Envoy Gateway Fabric
 Gateway API specification is part of Kubernetes, however requires provider software to implement the solution. In this example I am using Envoy Gateway Fabric to implement Gateway API
