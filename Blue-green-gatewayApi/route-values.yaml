@@ -1,0 +1,14 @@
+route:
+  enabled: true
+  parentRef:
+    gatewayName: external-gateway
+    namespace: gateway
+  hostnames:
+    - bluegreen.vettom.online
+  backendRef:
+    rules:
+    - backendRefs:
+      - name: myapp-v1-bluegreen
+        port: 8080
+        weight: 1
+
