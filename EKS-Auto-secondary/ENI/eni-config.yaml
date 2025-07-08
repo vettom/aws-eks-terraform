@@ -1,0 +1,13 @@
+# apiVersion: crd.k8s.amazonaws.com/v1alpha1
+# kind: ENIConfig
+# metadata:
+#  name: my-conf-1-us-east-2a
+# spec:
+#   securityGroups: 
+#     - sg-0bec30446388a430c
+#   subnet: subnet-0e87f65493b767c22
+#   tags:
+#     "kubernetes.io/cluster/my-cluster": "owned"
+#     "kubernetes.io/role/internal-elb": "1"
+#   ipv6Enabled: false
+#   eniConfigPolicy: "default"

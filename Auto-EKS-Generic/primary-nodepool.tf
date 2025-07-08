@@ -1,5 +1,5 @@
 
-resource "kubernetes_manifest" "nodepool_primary_nodepool" {
+# resource "kubernetes_manifest" "nodepool_primary_nodepool" {
 #   manifest = {
 #     "apiVersion" = "karpenter.sh/v1"
 #     "kind"       = "NodePool"
