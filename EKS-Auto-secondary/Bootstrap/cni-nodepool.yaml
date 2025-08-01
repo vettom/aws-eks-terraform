@@ -1,0 +1,60 @@
+apiVersion: eks.amazonaws.com/v1
+kind: NodeClass
+metadata:
+  finalizers:
+  - eks.amazonaws.com/termination
+  name: primary-nodeclass
+spec:
+  ephemeralStorage:
+    iops: 3000
+    size: 80Gi
+    throughput: 125
+  networkPolicy: DefaultAllow
+  networkPolicyEventLogs: Disabled
+  role: AmazonEKSAutoNodeRole
+  securityGroupSelectorTerms:
+    - id: sg-0a3809dc2c3c7b4e5
+  podSecurityGroupSelectorTerms:
+    - id: sg-0a3809dc2c3c7b4e5  
+  snatPolicy: Random
+  subnetSelectorTerms:
+    - tags:
+        subnet_type: "private"
+        subnet_purpose: "EKS_Cluster"
+  podSubnetSelectorTerms:
+    - tags:
+        pod_subnet: "true"
+        subnet_purpose: "EKS_Cluster"
+---
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  name: primary-nodepool
+spec:
+  weight: 20
+  template:
+    spec:
+      expireAfter: 336h
+      nodeClassRef:
+        group: eks.amazonaws.com
+        kind: NodeClass
+        name: primary-nodeclass
+      requirements:
+      - key: karpenter.sh/capacity-type
+        operator: In
+        values: ["spot","on-demand"]
+      - key: eks.amazonaws.com/instance-category
+        operator: In
+        values: ["c","m","r"]
+      - key: eks.amazonaws.com/instance-generation
+        operator: Gt
+        values: ["5"]
+      - key: kubernetes.io/arch
+        operator: In
+        values:
+        - amd64
+      - key: kubernetes.io/os
+        operator: In
+        values:
+        - linux
+      terminationGracePeriod: 24h0m0s

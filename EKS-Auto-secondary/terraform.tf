@@ -5,10 +5,6 @@ terraform {
       source  = "hashicorp/aws"
       version = ">=5.84.0"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = ">=2.35.1"
-    }
   }
 }
 
@@ -17,16 +13,17 @@ provider "aws" {
   profile = "labs" # Configure profile or authentication as required.
 }
 
-# Disabling as it cannot work during EKS provisioning.
-#provider "kubernetes" {
-#  host                   = aws_eks_cluster.eks-auto-demo.endpoint
-#  cluster_ca_certificate = base64decode(aws_eks_cluster.eks-auto-demo.certificate_authority.0.data)
-#  exec {
-#    api_version = "client.authentication.k8s.io/v1beta1"
-#    args        = ["eks", "--profile", "labs", "get-token", "--cluster-name", aws_eks_cluster.eks-auto-demo.name]
-#    command     = "aws"
-#  }
-#}
+provider "helm" {
+  kubernetes = {
+    host                   = module.eks.cluster_endpoint
+    cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+    exec = {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      args        = ["eks", "get-token", "--profile", "labs", "--cluster-name", module.eks.cluster_name]
+      command     = "aws"
+    }
+  }
+}
 
-
-
+# Fetch the current AWS region
+data "aws_region" "current" {}
