@@ -4,9 +4,9 @@
 AWS VPC secondary IP range enables you have have smaller IP range for your nodes, while pods can make use of seconday IP range. This provides improved security as well as does not use up IP pools available for nodes.
 
 ### Tasks
-[x] Create VPC and define secondary IP range
-[x] Configure VPC-CNI and EniConfig for each secondary subnet
-[x] Configure Karpenter to provision nodes that support secondary IP for pods
+- [x] Create VPC and define secondary IP range
+- [x] Configure VPC-CNI and EniConfig for each secondary subnet
+- [x] Configure Karpenter to provision nodes that support secondary IP for pods
 
 [<img src="https://vettom-images.s3.eu-west-1.amazonaws.com/aws/vpc-secondary-ip.jpg">](https://vettom.pages.dev/)
 
