@@ -11,6 +11,12 @@ terraform {
 provider "aws" {
   region  = "eu-west-1"
   profile = "labs" # Configure profile or authentication as required.
+  default_tags {
+    tags = {
+      Environment = "EKS-Auto-Secondary"
+      created_by  = "Terraform"
+    }
+  }
 }
 
 provider "helm" {

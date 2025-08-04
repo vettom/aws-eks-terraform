@@ -15,7 +15,8 @@ spec:
   securityGroupSelectorTerms:
     - id: sg-0a3809dc2c3c7b4e5
   podSecurityGroupSelectorTerms:
-    - id: sg-0a3809dc2c3c7b4e5  
+    - tags:
+        pod_security_group: "true"  
   snatPolicy: Random
   subnetSelectorTerms:
     - tags:
