@@ -25,7 +25,9 @@ kubectl apply -f Bootstrap/primary-nodepool.yaml
 ```
 ## Testing
 Deploy a pod and verify that pods IP addresses is allocated from secondary CIDR range
-`kubectl run nginx --image=nginx `
+```bash
+kubectl run nginx --image=nginx 
+```
 This will trigger Karpenter to spin up a node and provision pod.
 
 ## Nodeclass specification

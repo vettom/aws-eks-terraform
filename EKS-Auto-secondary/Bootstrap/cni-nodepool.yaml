@@ -13,7 +13,9 @@ spec:
   networkPolicyEventLogs: Disabled
   role: AmazonEKSAutoNodeRole
   securityGroupSelectorTerms:
-    - id: sg-0a3809dc2c3c7b4e5
+    - tags:
+        "subnet_type": "private"
+        "subnet_purpose": "EKS_Cluster"
   podSecurityGroupSelectorTerms:
     - tags:
         pod_security_group: "true"  
