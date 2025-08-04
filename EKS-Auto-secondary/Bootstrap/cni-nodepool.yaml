@@ -14,11 +14,10 @@ spec:
   role: AmazonEKSAutoNodeRole
   securityGroupSelectorTerms:
     - tags:
-        "subnet_type": "private"
-        "subnet_purpose": "EKS_Cluster"
+        "Name": "eks-auto-demo-node"
   podSecurityGroupSelectorTerms:
     - tags:
-        pod_security_group: "true"  
+        "Name": "eks-auto-demo-node"
   snatPolicy: Random
   subnetSelectorTerms:
     - tags:

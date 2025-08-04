@@ -36,5 +36,3 @@ resource "helm_release" "vpc-cni" {
     EOT
   ]
 }
-
-
