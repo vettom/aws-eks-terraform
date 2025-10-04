@@ -11,4 +11,16 @@ route:
       - name: myapp-v1-bluegreen
         port: 8080
         weight: 1
+    #   - name: myapp-v2-bluegreen
+    #     port: 8080
+    #     weight: 0
+    # - backendRefs:
+    #   - name: myapp-v3-bluegreen
+    #     port: 8080
+    #     weight: 1
+    #   matches:
+    #   - headers:
+    #     - name: traffic
+    #       type: Exact
+    #       value: test
 
