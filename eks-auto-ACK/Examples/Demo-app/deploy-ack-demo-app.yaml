@@ -1,0 +1,31 @@
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::<aws-account-id>:role/ack-demo-app-role
+  name: ack-demo-app-sa
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ack-demo-app
+  name: ack-demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ack-demo-app
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: ack-demo-app
+    spec:
+      serviceAccountName: ack-demo-app-sa
+      containers:
+      - image: dennysv/dvawscli
+        name: dvawscli
+        resources: {}
+

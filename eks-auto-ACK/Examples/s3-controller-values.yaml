@@ -1,0 +1,5 @@
+aws:
+  region: "eu-west-1"
+serviceAccount:
+  annotations: 
+    eks.amazonaws.com/role-arn: "arn:aws:iam::<aws-account-id>:role/ack-s3-controller"

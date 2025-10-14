@@ -1,0 +1,27 @@
+apiVersion: iam.services.k8s.aws/v1alpha1
+kind: Role
+metadata:
+  name: example-role-101
+spec:
+  name: example-role-101
+  assumeRolePolicyDocument: |
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": {
+            "Service": "ec2.amazonaws.com"
+          },
+            "Action": [
+                "sts:AssumeRole",
+                "sts:TagSession"
+            ]
+        }
+      ]
+    }
+  description: "Example role created by ACK"
+  maxSessionDuration: 3600
+  policies:
+    - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+  

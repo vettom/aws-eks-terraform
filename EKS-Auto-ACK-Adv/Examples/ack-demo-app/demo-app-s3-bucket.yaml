@@ -1,0 +1,14 @@
+apiVersion: s3.services.k8s.aws/v1alpha1
+kind: Bucket
+metadata:
+  name:  ack-demo-app-bucket-oct-2025
+spec:
+  name: ack-demo-app-bucket-oct-2025
+  versioning:
+    status: Disabled
+  tagging:
+    tagSet:
+      - key: environment
+        value: dev
+      - key: owner
+        value: "Denny Vettom"

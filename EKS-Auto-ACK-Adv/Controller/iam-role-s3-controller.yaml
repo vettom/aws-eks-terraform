@@ -1,0 +1,39 @@
+apiVersion: iam.services.k8s.aws/v1alpha1
+kind: Role
+metadata:
+  name: ack-s3-controller
+spec:
+  name: ack-s3-controller
+  assumeRolePolicyDocument: |
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": {
+                    "Service": "pods.eks.amazonaws.com"
+                },
+                "Action": [
+                    "sts:TagSession",
+                    "sts:AssumeRole"
+                ]
+            }
+        ]
+    }        
+  description: "Example role created by ACK"
+  maxSessionDuration: 3600
+  policies:
+    - arn:aws:iam::aws:policy/AmazonS3FullAccess
+---  
+apiVersion: eks.services.k8s.aws/v1alpha1
+kind: PodIdentityAssociation
+metadata:
+  name: ack-s3-controller
+  namespace: default
+spec:
+  clusterName: eks-auto-demo
+  namespace: ack-system
+  serviceAccount: ack-s3-controller
+  roleRef:
+    from:
+      name: ack-s3-controller

@@ -1,0 +1,49 @@
+apiVersion: iam.services.k8s.aws/v1alpha1
+kind: Policy
+metadata:
+  name: demo-app-bucket-access-policy
+spec:
+  name: demo-app-bucket-access-policy
+  description: "Allows ACK EKS Controller to manage Pod Identity Associations"
+  policyDocument: |
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "VisualEditor0",
+          "Effect": "Allow",
+          "Action": [ "s3:GetObject", "s3:ListBucket", "s3:PutObject"],
+          "Resource": [ "arn:aws:s3:::eks-auto-demo-bucket-102025",  "arn:aws:s3:::eks-auto-demo-bucket-102025/*"]
+        }
+      ]
+    }
+---
+apiVersion: iam.services.k8s.aws/v1alpha1
+kind: Role
+metadata:
+  name: ack-demo-app-role
+spec:
+  name: ack-demo-app-role
+  assumeRolePolicyDocument: |
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": {
+                    "Federated": "arn:aws:iam::<aws-account-id>:oidc-provider/oidc.eks.eu-west-1.amazonaws.com/id/87AD44391B740265AE0AB65382E8D918"
+                },
+                "Action": "sts:AssumeRoleWithWebIdentity",
+                "Condition": {
+                    "StringEquals": {
+                        "oidc.eks.eu-west-1.amazonaws.com/id/87AD44391B740265AE0AB65382E8D918:aud": "sts.amazonaws.com",
+                        "oidc.eks.eu-west-1.amazonaws.com/id/87AD44391B740265AE0AB65382E8D918:sub": "system:serviceaccount:default:ack-demo-app-sa"
+                    }
+                }
+            }
+        ]
+    }       
+  description: "Example role created by ACK"
+  maxSessionDuration: 3600
+  policies:
+    - arn:aws:iam::<aws-account-id>:policy/demo-app-bucket-access-policy

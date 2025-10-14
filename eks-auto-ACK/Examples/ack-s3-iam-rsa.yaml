@@ -1,0 +1,28 @@
+apiVersion: iam.services.k8s.aws/v1alpha1
+kind: Role
+metadata:
+  name: ack-s3-controller
+spec:
+  name: ack-s3-controller
+  assumeRolePolicyDocument: |
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": {
+                    "Federated": "arn:aws:iam::<aws-account-id>:oidc-provider/oidc.eks.eu-west-1.amazonaws.com/id/87AD44391B740265AE0AB65382E8D918"
+                },
+                "Action": "sts:AssumeRoleWithWebIdentity",
+                "Condition": {
+                    "StringEquals": {
+                        "oidc.eks.eu-west-1.amazonaws.com/id/87AD44391B740265AE0AB65382E8D918:sub": "system:serviceaccount:ack-system:ack-s3-controller"
+                    }
+                }
+            }
+        ]
+    }     
+  description: "ACK S3 controller role created by ACK"
+  maxSessionDuration: 3600
+  policies:
+    - "arn:aws:iam::aws:policy/AmazonS3FullAccess"

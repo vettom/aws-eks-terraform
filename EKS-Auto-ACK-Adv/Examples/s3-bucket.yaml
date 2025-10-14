@@ -1,0 +1,14 @@
+apiVersion: s3.services.k8s.aws/v1alpha1
+kind: Bucket
+metadata:
+  name:  eks-auto-demo-bucket-102025
+spec:
+  name: eks-auto-demo-bucket-102025
+  versioning:
+    status: Disabled
+  tagging:
+    tagSet:
+      - key: environment
+        value: dev
+      - key: owner
+        value: "Denny Vettom"

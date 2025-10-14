@@ -1,0 +1,66 @@
+apiVersion: iam.services.k8s.aws/v1alpha1
+kind: Policy
+metadata:
+  name: demo-app-bucket-access-policy
+spec:
+  name: demo-app-bucket-access-policy
+  description: "Allows ACK EKS Controller to manage Pod Identity Associations"
+  policyDocument: |
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "VisualEditor0",
+          "Effect": "Allow",
+          "Action": [
+            "s3:GetObject",
+            "s3:ListBucket"
+          ],
+          "Resource": [
+            "arn:aws:s3:::ack-demo-app-bucket-oct-2025",
+            "arn:aws:s3:::ack-demo-app-bucket-oct-2025/*"
+          ]
+        }
+      ]
+    }
+---
+apiVersion: iam.services.k8s.aws/v1alpha1
+kind: Role
+metadata:
+  name: ack-demo-app-role
+spec:
+  name: ack-demo-app-role
+  assumeRolePolicyDocument: |
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": {
+                    "Service": "pods.eks.amazonaws.com"
+                },
+                "Action": [
+                    "sts:TagSession",
+                    "sts:AssumeRole"
+                ]
+            }
+        ]
+    }        
+  description: "Example role created by ACK"
+  maxSessionDuration: 3600
+  policies:
+    - arn:aws:iam::<aws-account-id>:policy/demo-app-bucket-access-policy
+
+---  
+apiVersion: eks.services.k8s.aws/v1alpha1
+kind: PodIdentityAssociation
+metadata:
+  name: ack-demo-app-sa
+  namespace: default
+spec:
+  clusterName: eks-auto-demo
+  namespace: default
+  serviceAccount: ack-demo-app-sa
+  roleRef:
+    from:
+      name: ack-demo-app-role
