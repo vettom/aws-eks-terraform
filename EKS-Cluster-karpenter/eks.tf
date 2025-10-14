@@ -32,7 +32,7 @@ module "eks" {
   access_entries = {
     admin = {
       kubernetes_groups = []
-      principal_arn     = "arn:aws:iam::218687456330:user/denny.vettom@vettom.online"
+      principal_arn     = "arn:aws:iam::<aws-account-id>:user/denny.vettom@vettom.online"
       policy_associations = {
         example = {
           policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"

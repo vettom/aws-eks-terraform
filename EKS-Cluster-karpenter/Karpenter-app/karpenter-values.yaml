@@ -4,7 +4,7 @@ settings:
 serviceAccount:
   name: "karpenter-controller-eks-demo"
   annotations:
-    eks.amazonaws.com/role-arn: "arn:aws:iam::218687456330:role/karpenter-controller-eks-demo"
+    eks.amazonaws.com/role-arn: "arn:aws:iam::<aws-account-id>:role/karpenter-controller-eks-demo"
 controller:
   resources:
     requests:
