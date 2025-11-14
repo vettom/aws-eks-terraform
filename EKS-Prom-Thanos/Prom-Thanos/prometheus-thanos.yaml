@@ -1,0 +1,60 @@
+---
+alertmanager:
+  enabled: false
+ 
+grafana:
+  enabled: true 
+  defaultDashboardsEditable: false
+  defaultDashboardsEnabled: true
+  replicas: 1
+  additionalDataSources:  
+    - name: thanos
+      type: prometheus
+      access: proxy
+      url: http://thanos-query-frontend.thanos.svc.cluster.local:9090
+      isDefault: false
+      editable: false       
+prometheus:
+  enabled: true
+  thanosService:
+    enabled: true
+  thanosServiceMonitor:
+    enabled: true
+    additionalLabels:
+      app.kubernetes.io/instance: kube-prometheus-stack
+      app.kubernetes.io/name: prometheus
+  prometheusSpec: 
+    retention: 4h
+    thanos:
+      image: quay.io/thanos/thanos:v0.39.1
+      version: v0.39.1
+      objectStorageConfig:
+        secret:
+          type: S3
+          config:
+            bucket: "eks-auto-demo-thanos"
+            region: "eu-west-1"
+            endpoint: s3.amazonaws.com
+            insecure: false
+            signature_version2: false
+            put_user_metadata: {}
+            http_config:
+              idle_conn_timeout: 90s
+            trace:
+              enable: false      
+      listenLocal: false
+   
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: gp3
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi  
+    # externalLabels:
+    #   cluster: "eks-auto-demo"
+    #   environment: "prd"   
+        # existingSecret:
+        #   name: thanos-objstore-config
+        #   key: objstore.yml   

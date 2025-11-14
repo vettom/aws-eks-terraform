@@ -1,0 +1,177 @@
+# values.yaml for bitnami/thanos
+# Full setup with Query, Store Gateway, Compactor, and S3
+# Works with kube-prometheus-stack sidecar discovery
+
+global:
+  defaultStorageClass: "gp3"
+  imagePullSecrets: []
+  imageRegistry: ""
+  # Insecureimagesoption required as chart defaults to Bitami's private registry that are no longer available.
+  security:
+    allowInsecureImages: true
+
+image:
+  registry: docker.io
+  repository: thanosio/thanos
+  tag: v0.40.1
+
+# # --- Common settings ---
+# existingObjstoreSecret: "thanos-objstore-config"
+objstoreConfig: |
+  type: S3
+  config:
+    bucket: "eks-auto-demo-thanos"
+    region: "eu-west-1"
+    endpoint: s3.amazonaws.com
+    insecure: false
+    signature_version2: false
+    put_user_metadata: {}
+    http_config:
+      idle_conn_timeout: 90s
+    trace:
+      enable: false   
+
+podSecurityContext:
+  enabled: true
+  fsGroup: 1001
+
+containerSecurityContext:
+  enabled: true
+  runAsUser: 1001
+  runAsNonRoot: true
+
+serviceAccount:
+  create: true
+  name: thanos-sa
+
+rbac:
+  create: true
+
+# ------------------------
+# 1️⃣ Thanos Query
+# ------------------------
+query:
+  enabled: true
+  replicaCount: 1
+  replicaLabel: prometheus_replica
+
+  dnsDiscovery:
+    enabled: true
+    sidecarsService: kube-prometheus-stack-thanos-discovery
+    sidecarsNamespace: monitoring
+
+  extraArgs:
+    - "--log.level=info"
+    - "--query.replica-label=replica"
+    - "--store=dnssrv+_grpc._tcp.kube-prometheus-stack-thanos-discovery.monitoring.svc.cluster.local"
+
+  service:
+    type: ClusterIP
+    ports:
+      http: 10902
+      grpc: 10901
+
+  resources:
+    requests:
+      cpu: 200m
+      memory: 256Mi
+    limits:
+      cpu: 1
+      memory: 2Gi
+
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: monitoring
+
+# ------------------------
+# 2️⃣ Store Gateway
+# ------------------------
+storegateway:
+  enabled: true
+  replicaCount: 1
+  extraArgs:
+    - "--sync-block-duration=3m"
+    - "--objstore.config-file=/conf/objstore.yml"
+  service:
+    type: ClusterIP
+    ports:
+      grpc: 10901
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: monitoring
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 1
+      memory: 1Gi
+
+# ------------------------
+# 3️⃣ Compactor
+# ------------------------
+compactor:
+  enabled: true
+  retentionResolutionRaw: 30d
+  retentionResolution5m: 90d
+  retentionResolution1h: 180d
+  extraArgs:
+    - "--objstore.config-file=/conf/objstore.yml"
+    - "--wait"
+  persistence:
+    enabled: true
+    size: 20Gi
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: monitoring
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 1
+      memory: 2Gi
+
+# ------------------------
+# 4️⃣ Query Frontend (optional but recommended)
+# ------------------------
+queryFrontend:
+  enabled: true
+  replicaCount: 1
+  extraArgs:
+    - "--query-range.split-interval=24h"
+    - "--query-range.response-cache-max-freshness=1m"
+  service:
+    type: ClusterIP
+    ports:
+      http: 9090
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: monitoring
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 1
+      memory: 2Gi
+
+# ------------------------
+# Disabled Components (optional)
+# ------------------------
+receive:
+  enabled: false
+
+ruler:
+  enabled: false
+
+bucketweb:
+  enabled: false
