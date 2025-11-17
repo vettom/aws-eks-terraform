@@ -25,6 +25,7 @@ prometheus:
       app.kubernetes.io/name: prometheus
   prometheusSpec: 
     retention: 4h
+    replicas: 2
     thanos:
       image: quay.io/thanos/thanos:v0.39.1
       version: v0.39.1
@@ -43,7 +44,6 @@ prometheus:
             trace:
               enable: false      
       listenLocal: false
-   
     storageSpec:
       volumeClaimTemplate:
         spec:
@@ -52,9 +52,22 @@ prometheus:
           resources:
             requests:
               storage: 10Gi  
+    podAntiAffinity: ""
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: prometheus
+            operator.prometheus.io/name: kube-prometheus-stack-prometheus
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: prometheus
+            operator.prometheus.io/name: kube-prometheus-stack-prometheus              
     # externalLabels:
     #   cluster: "eks-auto-demo"
     #   environment: "prd"   
-        # existingSecret:
-        #   name: thanos-objstore-config
-        #   key: objstore.yml   
