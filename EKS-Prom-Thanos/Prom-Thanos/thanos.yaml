@@ -1,7 +1,3 @@
-# values.yaml for bitnami/thanos
-# Full setup with Query, Store Gateway, Compactor, and S3
-# Works with kube-prometheus-stack sidecar discovery
-
 global:
   defaultStorageClass: "gp3"
   imagePullSecrets: []
@@ -62,7 +58,6 @@ query:
 
   extraArgs:
     - "--log.level=info"
-    - "--query.replica-label=replica"
     - "--store=dnssrv+_grpc._tcp.kube-prometheus-stack-thanos-discovery.monitoring.svc.cluster.local"
 
   service:

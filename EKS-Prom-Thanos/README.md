@@ -19,3 +19,13 @@ helm install thanos bitnami/thanos --version 17.3.1 -f thanos.yaml -n thanos --c
 
 ## Architecture
 [<img src="https://vettom-images.s3.eu-west-1.amazonaws.com/monitoring/prom-thanos.jpg">](https://vettom.pages.dev/Monitoring/prometheus-thanos/)
+
+## Thanos components summary
+| Component                       | Purpose                                                      |
+| ------------------------------- | ------------------------------------------------------------ |
+| ✅ **Query-Front-end**           | (optional) Adds caching, better UI performance.       |
+| ✅ **Query**                     | Aggregates metrics from Prometheus sidecars and StoreGateway |
+| ✅ **StoreGateway**              | Reads historical blocks from S3                              |
+| ✅ **Compactor**                 | Deduplicates and compacts blocks in S3                       |
+| ⚙️ **Optional: Ruler**          | Allows rule evaluation based on S3 data                      |
+| ❌ **Bucketweb**                 | Usually not needed in production                             |
