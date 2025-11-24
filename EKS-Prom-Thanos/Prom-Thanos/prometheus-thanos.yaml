@@ -60,14 +60,7 @@ prometheus:
         labelSelector:
           matchLabels:
             app.kubernetes.io/name: prometheus
-            operator.prometheus.io/name: kube-prometheus-stack-prometheus
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: DoNotSchedule
-        labelSelector:
-          matchLabels:
-            app.kubernetes.io/name: prometheus
-            operator.prometheus.io/name: kube-prometheus-stack-prometheus              
+            operator.prometheus.io/name: kube-prometheus-stack-prometheus             
     # externalLabels:
     #   cluster: "eks-auto-demo"
     #   environment: "prd"   

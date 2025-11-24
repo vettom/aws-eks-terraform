@@ -1,4 +1,4 @@
-[<img src="https://vettom-images.s3.eu-west-1.amazonaws.com/logo/vettom-banner.jpg">](https://vettom.pages.dev/)
+[<img src="https://vettom-images.s3.eu-west-1.amazonaws.com/logo/vettom-banner.jpg">](https://vettom.pages.dev/Eks/eks-cluster-karpenterV1/)
 
 # Eks cluster and Karpenter V1
 Contains everything required to configure Karpenter autoscaling

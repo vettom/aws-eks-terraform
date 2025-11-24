@@ -14,7 +14,8 @@ terraform {
 
 provider "aws" {
   region  = "eu-west-1"
-  profile = "labs" # Configure profile or authentication as required.
+  profile = "dvettom" # Configure profile or authentication as required.
+  # profile = "labs" # Configure profile or authentication as required.
   default_tags {
     tags = {
       "Purpose" = "EKS features investigation and demo"

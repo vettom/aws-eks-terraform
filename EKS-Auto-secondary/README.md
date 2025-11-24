@@ -1,4 +1,4 @@
-[<img src="https://vettom-images.s3.eu-west-1.amazonaws.com/logo/vettom-banner.jpg">](https://vettom.pages.dev/)
+[<img src="https://vettom-images.s3.eu-west-1.amazonaws.com/logo/vettom-banner.jpg">](https://vettom.pages.dev/Eks/eks-auto-second-cidr/)
 
 # EKS-Auto and Karpenter with VPC secondary IP
 AWS VPC secondary IP range enables you have have smaller IP range for your nodes, while pods can make use of seconday IP range. This provides improved security as well as does not use up IP pools available for nodes.
@@ -8,7 +8,7 @@ AWS VPC secondary IP range enables you have have smaller IP range for your nodes
 - [x] Configure VPC-CNI and EniConfig for each secondary subnet
 - [x] Configure Karpenter to provision nodes that support secondary IP for pods
 
-[<img src="https://vettom-images.s3.eu-west-1.amazonaws.com/aws/vpc-secondary-ip.jpg">](https://vettom.pages.dev/)
+[<img src="https://vettom-images.s3.eu-west-1.amazonaws.com/aws/vpc-secondary-ip.jpg">](https://vettom.pages.dev/Eks/eks-auto-second-cidr/)
 
 ## Applying changes
 ```bash

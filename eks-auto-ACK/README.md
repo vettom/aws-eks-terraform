@@ -1,4 +1,4 @@
-[<img src="https://vettom-images.s3.eu-west-1.amazonaws.com/logo/vettom-banner.jpg">](https://vettom.pages.dev/)
+[<img src="https://vettom-images.s3.eu-west-1.amazonaws.com/logo/vettom-banner.jpg">](https://vettom.pages.dev/Eks/ack-get-started/)
 
 # Aws Controller for Kubernetes (ACK)
 Terraform code to provision EKS-Auto cluster with custom Nodepool that will provision SPOT instances. It also creates IAM policy and pod identity to provision `ack-iam-char` and `ack-eks-controller`
