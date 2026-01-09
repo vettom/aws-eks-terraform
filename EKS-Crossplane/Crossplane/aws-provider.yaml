@@ -1,0 +1,19 @@
+apiVersion: pkg.crossplane.io/v1beta1
+kind: DeploymentRuntimeConfig
+metadata:
+  name: irsa-runtimeconfig
+spec:
+  serviceAccountTemplate:
+    metadata:
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::218687456330:role/crossplane-eks-auto-demo
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-aws-s3
+spec:
+  package: xpkg.upbound.io/upbound/provider-aws-s3:v2.1.1
+  runtimeConfigRef:
+    name: irsa-runtimeconfig
+---

@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 01-core-apps-resources
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: default
+  sources:
+    - repoURL: https://github.com/vettom/eks-bootstrap-argocd.git
+      targetRevision: HEAD
+      path: core-apps-resources
+      helm:
+        valuesObject:
+          certManager:
+            dnsZones: {{- toYaml .Values.certmanager.dnsZones | nindent 14 }}
+            acmeServer: "{{ .Values.certmanager.acmeServer }}"
+          externalGateway:
+            hostname: "{{ .Values.externalGateway.hostname }}"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

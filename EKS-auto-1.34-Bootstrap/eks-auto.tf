@@ -1,6 +1,6 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 21.10"
+  version = "~> 21.0"
 
   name               = "eks-auto-demo"
   kubernetes_version = "1.34"

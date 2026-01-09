@@ -20,12 +20,6 @@ terraform apply --auto-approve
 ```
 This will create VPC with 2 subnets, install EKS Auto and configured `ClusterAdmin` access to the identity creating cluster.
 
-## Update kubeconfig to access cluster
-```bash
-aws eks --profile labs  --region eu-west-1 update-kubeconfig --name eks-auto-demo
-kubectl apply -f Bootstrap/primary-nodepool.yaml
-```
-
 ## Install Envoy Gateway
 ```bash
 # Install Envoy Gateway and Gateway API CRD's

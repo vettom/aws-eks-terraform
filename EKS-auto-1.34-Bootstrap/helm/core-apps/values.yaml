@@ -1,0 +1,39 @@
+cluster_name: "eks-auto-demo"
+
+argocd:
+  version: "9.2.0"
+  argo_url: "argocd.vettom.online"
+
+externaldns:
+  version: "1.19.0"
+  dnsZones:
+    - "vettom.online"
+    - "*.prd.vettom.online"
+
+certmanager:
+  version: "v1.19.2"
+  replicaCount: 1
+  dnsZones:
+    - "vettom.online"
+    - "*.vettom.online"
+  acmeServer: https://acme-v02.api.letsencrypt.org/directory
+
+metricsServer:
+  version: "3.13.0"
+
+envoyGateway:
+  version: "v1.6.1"
+  replicas: 1
+
+externalGateway:
+  hostname: "*.vettom.online"
+
+prometheus_crds:
+  version: "25.0.1"
+
+prometheus_stack:
+  version: "80.6.0"
+  grafana_url: "grafana.vettom.online"
+  prometheus_url: "prometheus.vettom.online"
+  alertmanager_url: "alertmanager.vettom.online"
+

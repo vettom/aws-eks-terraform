@@ -1,9 +1,9 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 21.10"
+  version = "~> 21.0"
 
   name               = "eks-auto-demo"
-  kubernetes_version = "1.34"
+  kubernetes_version = "1.33"
 
   # Optional
   endpoint_public_access = true

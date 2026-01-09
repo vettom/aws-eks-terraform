@@ -3,7 +3,7 @@ module "eks" {
   version = "20.10.0"
 
   cluster_name    = "eks-demo"
-  cluster_version = "1.31"
+  cluster_version = "1.33"
 
   cluster_endpoint_public_access           = true
   enable_irsa                              = true

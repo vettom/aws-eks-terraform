@@ -11,10 +11,7 @@ spec:
         group: eks.amazonaws.com
         kind: NodeClass
         name: default
-      requirements:
-      - key: "karpenter.k8s.aws/instance-hypervisor"
-        operator: In
-        values: ["nitro"]      
+      requirements: 
       - key: karpenter.sh/capacity-type
         operator: In
         values: ["spot","on-demand"]
