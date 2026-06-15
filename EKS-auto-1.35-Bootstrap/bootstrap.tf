@@ -1,12 +1,13 @@
 resource "helm_release" "bootstrap" {
-  name  = "bootstrap"
-  chart = "./helm/bootstrap"
+  name       = "bootstrap"
+  chart      = "./helm/bootstrap"
+  depends_on = [module.eks.cluster_certificate_authority_data, module.eks.cluster_endpoint]
 }
 
 resource "time_sleep" "wait_30_seconds" {
   depends_on = [helm_release.bootstrap]
 
-  create_duration = "30s"
+  create_duration = "60s"
 }
 
 resource "helm_release" "argocd" {

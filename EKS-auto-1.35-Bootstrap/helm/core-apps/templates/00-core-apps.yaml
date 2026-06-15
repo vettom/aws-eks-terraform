@@ -1,0 +1,47 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 00-core-apps
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: default
+  sources:
+    - repoURL: https://github.com/vettom/eks-bootstrap-argocd.git
+      targetRevision: HEAD
+      path: core-apps
+      helm:
+        valuesObject:
+          cluster_name: "{{ .Values.cluster_name }}"
+          argocd:
+            version: "{{ .Values.argocd.version }}"
+            argo_url: "{{ .Values.argocd.argo_url }}"
+          externaldns:
+            version: "{{ .Values.externaldns.version }}"
+            dnsZones: {{- toYaml .Values.externaldns.dnsZones | nindent 14 }}
+          certmanager:
+            version: "{{ .Values.certmanager.version }}"
+            replicaCount: "{{ .Values.certmanager.replicaCount }}"
+          metricsServer:
+            version: "{{ .Values.metricsServer.version }}"
+          envoyGateway:
+            version: "{{ .Values.envoyGateway.version }}"
+            replicas: "{{ .Values.envoyGateway.replicas }}"
+          prometheus_crds:
+            version: "{{ .Values.prometheus_crds.version }}"
+          prometheus_stack:
+            version: "{{ .Values.prometheus_stack.version }}"
+            grafana_url: "{{ .Values.prometheus_stack.grafana_url }}"
+            prometheus_url: "{{ .Values.prometheus_stack.prometheus_url }}"
+            alertmanager_url: "{{ .Values.prometheus_stack.alertmanager_url }}"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

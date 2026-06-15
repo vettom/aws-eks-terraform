@@ -1,0 +1,12 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: efs
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "false"
+provisioner: efs.csi.aws.com
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: fs-0696636506f2c7e3c # Replace with your actual EFS File System ID
+  directoryPerms: "700"
+  encryptInTransit: "true"

@@ -1,0 +1,41 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: s3files-sc
+provisioner: efs.csi.aws.com
+parameters:
+  # Encryption in transit is handled by the driver via TLS
+  encryptInTransit: "true"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: s3files-pv
+spec:
+  capacity:
+    storage: 10Gi # S3 storage is elastic; this acts as a placeholder capacity for K8s
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany # Allows multiple pods to attach simultaneously 
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: s3files-sc
+  mountOptions:
+      - iam          # CRITICAL for Pod Identity authorization during mounting
+      - nos3readcache # Required to enable file read direct from S3. This saves EFS write cost.
+  csi:
+    driver: efs.csi.aws.com
+    # CRITICAL: Replace 'fs-0123456789abcdef0' with your actual S3 File System ID
+    volumeHandle: s3files:fs-054223c1fbdc56f6d
+    # volumeHandle: s3files:fs-054223c1fbdc56f6d::fsap-058bfdadd000231ba
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: s3files-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: s3files-sc
+  resources:
+    requests:
+      storage: 10Gi # Must match the capacity specified in the PV

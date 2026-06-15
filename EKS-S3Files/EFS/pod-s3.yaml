@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dvtools
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: dvtools
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dvtools
+    spec:
+      # hostNetwork: true
+      containers:
+        - image: dennysv/dvtools:amd64
+          name: demo-echo
+          resources:
+            requests:
+              memory: 64Mi
+              cpu: 100m     
+          volumeMounts:
+            - name: s3-storage
+              mountPath: /mnt/s3            
+      volumes:
+        - name: s3-storage
+          persistentVolumeClaim:
+            claimName: s3files-pvc
