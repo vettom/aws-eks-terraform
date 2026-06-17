@@ -77,20 +77,17 @@ resource "aws_s3files_mount_target" "s3filesstore" {
   security_groups = [aws_security_group.s3files.id]
 }
 
-
+# Ignore below if custom mount path not required.
+## Create s3Object demoapp. This is required to enable mounting of custom access point 
 resource "aws_s3_object" "demoapp" {
   bucket  = aws_s3_bucket.s3filesstore.id
   key     = "demoapp/"
   content = ""
 }
 
+# Create access point for demoapp 
 resource "aws_s3files_access_point" "demoapp" {
   file_system_id = aws_s3files_file_system.s3filesstore.id
-
-  # posix_user {
-  #   gid = 1001
-  #   uid = 1001
-  # }
   root_directory {
     path = "/demoapp"
   }
