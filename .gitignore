@@ -20,6 +20,11 @@ __pycache__/
 crash.log
 crash.*.log
 
+.claude/
+.antigravity/
+.cursor/
+.gemini/
+
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
 override.tf

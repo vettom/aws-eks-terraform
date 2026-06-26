@@ -1,0 +1,34 @@
+locals {
+  ebscsi_serviceaccount = "ebs-csi-controller-${var.cluster_name}"
+  ebscsi_namepsace      = "kube-system"
+}
+
+data "aws_iam_policy_document" "ebs-csi_controller_assume_role_policy" {
+  statement {
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+    effect  = "Allow"
+
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(module.eks.oidc_provider, "https://", "")}:sub"
+      values   = ["system:serviceaccount:${local.ebscsi_namepsace}:ebs-csi-controller-sa"]
+    }
+
+    principals {
+      identifiers = [module.eks.oidc_provider_arn]
+      type        = "Federated"
+    }
+
+  }
+}
+
+resource "aws_iam_role" "ebscsi_iam_role" {
+  name               = local.ebscsi_serviceaccount
+  assume_role_policy = data.aws_iam_policy_document.ebs-csi_controller_assume_role_policy.json
+}
+
+resource "aws_iam_role_policy_attachment" "ebscsi_policy_attachement" {
+  role       = aws_iam_role.ebscsi_iam_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+
+}

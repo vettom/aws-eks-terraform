@@ -1,7 +1,7 @@
 data "aws_vpc" "this" {
   filter {
     name   = "tag:Name"
-    values = [var.vpc_id]
+    values = [var.vpc_name]
   }
 }
 
@@ -25,15 +25,13 @@ data "aws_subnets" "private" {
   }
 
   filter {
-    name = "tag:Name"
-    values = [
-      "${var.vpc_id}-private-*"
-    ]
+    name   = "tag:Name"
+    values = var.private_subnet_tags
   }
 }
 
 # Get secondary subnets for EKS to use for pods
-data "aws_subnets" "podsubnets" {
+data "aws_subnets" "pod_subnets" {
   filter {
     name = "vpc-id"
     values = [
@@ -42,15 +40,13 @@ data "aws_subnets" "podsubnets" {
   }
 
   filter {
-    name = "tag:Name"
-    values = [
-      "${var.vpc_id}-podsubnet-*"
-    ]
+    name   = "tag:Name"
+    values = var.pod_subnet_tags
   }
 }
 
-data "aws_subnet" "podsubnet" {
-  for_each = toset(data.aws_subnets.podsubnets.ids)
+data "aws_subnet" "pod_subnet" {
+  for_each = toset(data.aws_subnets.pod_subnets.ids)
   id       = each.key
 }
 

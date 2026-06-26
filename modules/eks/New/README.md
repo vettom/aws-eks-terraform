@@ -1,7 +1,14 @@
 [<img src="https://vettom-images.s3.eu-west-1.amazonaws.com/logo/vettom-banner.jpg">](https://vettom.pages.dev/Eks/eks-cluster-karpenterV1/)
 
-#Scenario
-VPC is created in the modules directory with secondary subnet
+# Eks cluster and Karpenter V1
+
+Contains everything required to configure Karpenter autoscaling
+Steps
+
+- Apply terraform
+- Configure kubeconfig and retrieve Endpoint URL
+- Install Karpenter controller
+- Apply karpenter-nodepool
 
 ## Steps
 
@@ -18,9 +25,12 @@ aws ecr-public get-login-password --region us-east-1 | helm registry login \
      --username AWS --password-stdin public.ecr.aws
 ```
 
-## EKS Build Notes
+## EFS configuration
 
-### VPC Requirements
+Requires
 
-- Tags for Private and Public subnets are required
-- Enable NAT gateway or transit gateway
+- IAM role with AmazonEFSCSIDriverPolicy and AmazonElasticFileSystemsUtils policies
+- Security groups for EFS and EC2
+- EFS mount target per subnet
+- Output EFS file-system ID for storage class creation.
+-
