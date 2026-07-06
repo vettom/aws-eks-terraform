@@ -10,6 +10,13 @@ Terraform module that provisions an EKS cluster with managed node groups (Bottle
 - Karpenter subnet discovery tags applied per-cluster to support multi-cluster VPC sharing
 - SSM access enabled on nodes via `AmazonSSMManagedInstanceCore`
 - EKS Pod Identity agent addon installed
+- Karpenter controller IAM role + EKS Pod Identity association (no IRSA/OIDC trust needed), plus an access entry for Karpenter-launched nodes reusing the pre-provisioned `eks-auto` node IAM role
+
+## Karpenter
+
+This module provisions the IAM role, EKS Pod Identity association (`namespace = var.karpenter_namespace`, `service_account = "karpenter"`), and node access entry required to run Karpenter. The `helm_release` itself lives at the **root** (`karpenter.tf`), not inside this module, because the root's `helm` provider is configured from this module's own outputs — a `helm_release` inside the module would create a provider dependency cycle.
+
+Node classes launched by Karpenter should reference the `karpenter_node_iam_role_name` output as their `EC2NodeClass.spec.role`, and select subnets/security groups via the `karpenter.sh/discovery/<cluster_name>` tags this module already applies. See `../../karpenter-nodepool.yaml` for an example NodePool/EC2NodeClass.
 
 ## Usage
 
@@ -62,6 +69,13 @@ module "eks" {
 | `node_max_size` | `number` | `3` | Maximum number of nodes |
 | `node_desired_size` | `number` | `2` | Desired number of nodes |
 | `node_volume_size` | `number` | `50` | Data volume size (GiB) attached to each node (`/dev/xvdb`) |
+| `karpenter_namespace` | `string` | `"karpenter"` | Namespace Karpenter's ServiceAccount is associated with via Pod Identity |
+
+### Karpenter (required)
+
+| Name | Type | Description |
+|------|------|-------------|
+| `karpenter_version` | `string` | Version of the Karpenter helm chart (applied at the root, see [Karpenter](#karpenter)) |
 
 ## Notes
 

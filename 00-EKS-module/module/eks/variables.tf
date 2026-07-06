@@ -87,7 +87,7 @@ variable "coredns_version" {
   description = "Version of coredns to use."
 }
 
-variable "node_instance_type" {
+variable "node_instance_types" {
   type        = list(string)
   description = "Instance types to use for the nodes."
   default     = ["m7i.large", "m6i.large", "m5.large"]

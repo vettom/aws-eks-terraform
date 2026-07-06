@@ -3,6 +3,32 @@
 #Scenario
 VPC is created in the modules directory with secondary subnet
 
+# Requirements Terraform/EKS/AWS
+
+[x] - VPC CNI with secondary IP block
+[] - Karpenter for node management
+[x] - EBS CSI Driver
+[x] - EKS podIdentity
+[] - AWS Load Balancer Controller
+[x] - kube-proxy
+[x] - core-dns
+[] - DNS domain name internal and external
+[] - External DNS for public and private DNS records
+[] - Certificate manager
+[] - External secrets with access to cluster Path and SSM
+[] - EFS file system for persistent storage
+[] - security groups for EFS to access from EKS nodes
+[] - Mount target in each subnet
+[] - EFS Filesyste
+[] - EFS SC
+
+## Additional and optional
+
+[] - S3 bucket, s3-filesystem, access point and bucket policy for EFS (optional)
+[] - ECR and ECR access (optional)
+[] - S3 bucket for Thanos (optional)
+)
+
 ## Steps
 
 ```bash

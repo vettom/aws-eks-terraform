@@ -11,6 +11,12 @@ locals {
   eks_pod_identity_agent_addon_version     = "v1.3.10-eksbuild.3"
   kube_proxy_version                       = "v1.35.3-eksbuild.13"
   coredns_version                          = "v1.14.3-eksbuild.3"
+  node_instance_types                      = ["m7i.large", "m6i.large", "m5.large"]
+  node_capacity_type                       = "SPOT"
+  node_min_size                            = 1
+  node_max_size                            = 2
+  node_desired_size                        = 1
+  node_volume_size                         = 60
 }
 
 module "eks" {
@@ -27,4 +33,10 @@ module "eks" {
   eks_pod_identity_agent_addon_version     = local.eks_pod_identity_agent_addon_version
   kube_proxy_version                       = local.kube_proxy_version
   coredns_version                          = local.coredns_version
+  node_instance_types                      = local.node_instance_types
+  node_capacity_type                       = local.node_capacity_type
+  node_min_size                            = local.node_min_size
+  node_max_size                            = local.node_max_size
+  node_desired_size                        = local.node_desired_size
+  node_volume_size                         = local.node_volume_size
 }

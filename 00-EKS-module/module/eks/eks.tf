@@ -58,7 +58,7 @@ module "eks" {
       min_size       = var.node_min_size
       max_size       = var.node_max_size
       desired_size   = var.node_desired_size
-      instance_types = var.node_instance_type
+      instance_types = var.node_instance_types
       capacity_type  = var.node_capacity_type
 
       iam_role_additional_policies = {
