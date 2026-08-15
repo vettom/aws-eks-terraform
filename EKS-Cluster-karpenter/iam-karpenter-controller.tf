@@ -61,7 +61,9 @@ resource "aws_iam_policy" "karpenter_controller_policy" {
             "ec2:DescribeSecurityGroups",
             "ec2:CreateTags",
             "pricing:GetProducts",
-            "iam:GetInstanceProfile"
+            "iam:GetInstanceProfile",
+            "iam:ListInstanceProfiles",
+            "iam:PassRole"
           ],
           "Resource" : "*"
         },

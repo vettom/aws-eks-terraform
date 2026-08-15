@@ -9,6 +9,9 @@ spec:
   template:
     spec:
       requirements:
+        - key: karpenter.k8s.aws/instance-hypervisor
+          operator: In
+          values: ["nitro"]      
         - key: kubernetes.io/arch
           operator: In
           values: ["amd64"]
@@ -22,7 +25,7 @@ spec:
           operator: In
           values: ["c", "m", "r"]
         - key: karpenter.k8s.aws/instance-generation
-          operator: Gt
+          operator: Gte
           values: ["2"]
       nodeClassRef:
         apiVersion: karpenter.k8s.aws/v1beta1
