@@ -49,13 +49,13 @@ spec:
   # amiFamily: AL2023
   # amiSelectorTerms:
   #   - alias: al2023@latest
-  role: { { .Values.nodeRole | quote } }
+  role: {{ .Values.nodeRole | quote }}
   subnetSelectorTerms:
     - tags:
-        karpenter.sh/discovery: { { .Values.clusterName | quote } }
+        karpenter.sh/discovery: {{ .Values.clusterName | quote }}
   securityGroupSelectorTerms:
     - tags:
-        karpenter.sh/discovery: { { .Values.clusterName | quote } }
+        karpenter.sh/discovery: {{ .Values.clusterName | quote }}
   tags:
-    karpenter.sh/discovery: { { .Values.clusterName | quote } }
-    Name: { { printf "%s-karpenter-node" .Values.clusterName | quote } }
+    karpenter.sh/discovery: {{ .Values.clusterName | quote }}
+    Name: {{ printf "%s-karpenter-node" .Values.clusterName | quote }}
