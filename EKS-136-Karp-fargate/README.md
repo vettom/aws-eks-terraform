@@ -36,20 +36,31 @@ This configuration provisions an Amazon EKS **1.36** cluster (`terraform-aws-mod
    - All EKS add-ons (`vpc-cni`, `eks-pod-identity-agent`, `kube-proxy`, and `coredns`) use `aws_eks_addon_version` data sources (`most_recent = true`) tied to `var.cluster_version`, automatically selecting the latest compatible add-on version whenever the Kubernetes cluster version changes.
    - `coredns` (`replicaCount = 1`) explicitly depends on both `helm_release.karpenter` and `helm_release.karpenter_nodepool` so worker nodes are provisioned before the add-on readiness check completes.
 
+## Cost compare
+
+| Compute Option            | Architecture    | vCPU | Memory (GB) | Hourly Rate   | Estimated Monthly Cost (730 hrs) |
+| :------------------------ | :-------------- | :--- | :---------- | :------------ | :------------------------------- |
+| **Minimal Fargate Node**  | Graviton (ARM)  | 0.25 | 0.5         | $0.0099 / hr  | **$7.21 / mo**                   |
+| **Minimal Fargate Node**  | Intel/AMD (x86) | 0.25 | 0.5         | $0.0123 / hr  | **$9.01 / mo**                   |
+| **m7g.large — Spot**      | Graviton (ARM)  | 2.00 | 8.0         | ~$0.0396 / hr | **~$28.91 / mo**                 |
+| **m7i.large — Spot**      | Intel (x86)     | 2.00 | 8.0         | ~$0.0551 / hr | **~$40.22 / mo**                 |
+| **m7g.large — On-Demand** | Graviton (ARM)  | 2.00 | 8.0         | $0.0910 / hr  | **$66.43 / mo**                  |
+| **m7i.large — On-Demand** | Intel (x86)     | 2.00 | 8.0         | $0.1124 / hr  | **$82.05 / mo**                  |
+
 ## Project Structure
 
-| File / Path | Description |
-| :--- | :--- |
-| `terraform.tf` | Terraform (`>= 1.9`), AWS (`>= 6.59.0`, `eu-west-1` + `us-east-1` alias for Public ECR), and Helm (`>= 2.14`) providers |
-| `variables.tf` | Input variables (`cluster_name`, `cluster_version`, `vpc_id`, `karpenter_version`) |
-| `data.tf` | Caller identity, region, and shared Pod Identity assume-role policy document |
-| `vpc.tf` | VPC, private subnet, and pod subnet lookups plus EC2 tags for ELB and Karpenter discovery |
-| `eks.tf` | EKS cluster module, `vpc-cni` custom networking (`ENIConfig`), and `karpenter` Fargate profile |
-| `karpenter.tf` | Karpenter module, IRSA trust policy, and Helm releases (`karpenter-crd`, `karpenter`, `karpenter-nodepool`) |
-| `helm/nodepool/` | Local Helm chart defining the default `NodePool` and Bottlerocket `EC2NodeClass` |
-| `eks-addons.tf` | `eks-pod-identity-agent`, `kube-proxy`, and `coredns` EKS add-ons |
-| `outputs.tf` | Cluster name, endpoint, version, and Karpenter IAM role / SQS queue outputs |
-| `run.sh` | Helper script to initialize, apply, and configure local `kubeconfig` |
+| File / Path      | Description                                                                                                             |
+| :--------------- | :---------------------------------------------------------------------------------------------------------------------- |
+| `terraform.tf`   | Terraform (`>= 1.9`), AWS (`>= 6.59.0`, `eu-west-1` + `us-east-1` alias for Public ECR), and Helm (`>= 2.14`) providers |
+| `variables.tf`   | Input variables (`cluster_name`, `cluster_version`, `vpc_id`, `karpenter_version`)                                      |
+| `data.tf`        | Caller identity, region, and shared Pod Identity assume-role policy document                                            |
+| `vpc.tf`         | VPC, private subnet, and pod subnet lookups plus EC2 tags for ELB and Karpenter discovery                               |
+| `eks.tf`         | EKS cluster module, `vpc-cni` custom networking (`ENIConfig`), and `karpenter` Fargate profile                          |
+| `karpenter.tf`   | Karpenter module, IRSA trust policy, and Helm releases (`karpenter-crd`, `karpenter`, `karpenter-nodepool`)             |
+| `helm/nodepool/` | Local Helm chart defining the default `NodePool` and Bottlerocket `EC2NodeClass`                                        |
+| `eks-addons.tf`  | `eks-pod-identity-agent`, `kube-proxy`, and `coredns` EKS add-ons                                                       |
+| `outputs.tf`     | Cluster name, endpoint, version, and Karpenter IAM role / SQS queue outputs                                             |
+| `run.sh`         | Helper script to initialize, apply, and configure local `kubeconfig`                                                    |
 
 ## Deployment Steps
 
@@ -77,4 +88,3 @@ kubectl get nodes
 kubectl get pods -A
 kubectl get nodepool,ec2nodeclass
 ```
-

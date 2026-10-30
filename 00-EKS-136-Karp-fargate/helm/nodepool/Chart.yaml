@@ -1,0 +1,6 @@
+apiVersion: v2
+name: karpenter-nodepool
+description: Helm chart to deploy Karpenter NodePool and EC2NodeClass
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
